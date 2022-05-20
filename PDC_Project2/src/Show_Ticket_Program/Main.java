@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc_project2;
+package Show_Ticket_Program;
 
 /**
  *
  * @author JL Lopez
  */
-public class PDC_Project2 {
+public class Main {
 
     /**
      * @param args the command line arguments
