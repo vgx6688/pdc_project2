@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class Database {
 
     Connection conn = null;
-    String url = "jdbc:derby:PlayerDB;create=true";
+    String url = "jdbc:derby:ShowsDB;create=true";
     String dbusername = "pdc";
     String dbpassword = "pdc";
 
