@@ -26,13 +26,28 @@ public class Database {
     String dbpassword = "pdc";
 
     public void dbsetup() {
+        this.createTable("ShowsInfo");
+        this.createTable("TicketsInfo");
+        this.createTable("ShowsABookings");
+        this.createTable("ShowsBBookings");
+        this.createTable("ShowsCBookings");
+    }
+
+    public void createTable(String tableName) {
         try {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
-            String tableName = "UserInfo";
 
             if (!checkTableExists(tableName)) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (userid VARCHAR(12), password VARCHAR(12), score INT ");
+                if (tableName.equalsIgnoreCase("ShowsInfo")) {
+                    statement.executeUpdate("CREATE TABLE " + tableName + " (showID VARCHAR(1), date DATE, goldticket INT, silverticket INT, bronzeticket INT)");
+                    this.insertTableData(tableName);
+                } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
+                    statement.executeUpdate("CREATE TABLE " + tableName + " (tickettype VARCHAR(10), price INT)");
+                    this.insertTableData(tableName);
+                } else {
+                    statement.executeUpdate("CREATE TABLE " + tableName + " (bookingid VARCHAR(10), user VARCHAR(12), goldticket INT, silverticket INT, bronzeticket INT)");
+                }
             }
             statement.close();
         } catch (Throwable e) {
@@ -40,33 +55,55 @@ public class Database {
         }
     }
 
-    public Data checkName(String username, String password) {
-        Data data = new Data();
-        try {
+    public void insertTableData(String tableName) {
+        try{
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo WHERE userid = '" + username + "'");
-            if (rs.next()) {
-                String pass = rs.getString("password");
-                System.out.println("***" + pass);
-                System.out.println("found user");
-
-                if (password.compareTo(pass) == 0) {
-                    data.currentScore = rs.getInt("score");
-                    data.loginFlag = true;
-                } else {
-                    data.loginFlag = false;
-                }
-            } else {
-                System.out.println("User not found");
-                statement.executeUpdate("INSERT INTO UserInfo VALUES('" + username + "', '" + password + "', 0");
-                data.currentScore = 0;
-                data.loginFlag = true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            if (tableName.equalsIgnoreCase("ShowsInfo")) {
+                statement.executeUpdate("CREATE TABLE " + tableName + " (showID VARCHAR(1), date DATE, goldticket INT, silverticket INT, bronzeticket INT)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('A', 21/05/2022, 11, 12, 13)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('B', 26/05/2022, 21, 22, 23)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('C', 31/05/2022, 31, 32, 33)");
+                statement.executeBatch();
+            } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
+                statement.executeUpdate("CREATE TABLE " + tableName + " (tickettype VARCHAR(10), price INT)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('Gold', 30)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('Silver', 21)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('Bronze', 12)");
+                statement.executeBatch();
+            }  
+        } catch(Throwable e){
+            System.out.println("ERROR");
         }
-        return data;
+        
     }
+
+//    public Data checkName(String username, String password) {
+//        Data data = new Data();
+//        try {
+//            Statement statement = conn.createStatement();
+//            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo WHERE userid = '" + username + "'");
+//            if (rs.next()) {
+//                String pass = rs.getString("password");
+//                System.out.println("***" + pass);
+//                System.out.println("found user");
+//
+//                if (password.compareTo(pass) == 0) {
+//                    data.currentScore = rs.getInt("score");
+//                    data.loginFlag = true;
+//                } else {
+//                    data.loginFlag = false;
+//                }
+//            } else {
+//                System.out.println("User not found");
+//                statement.executeUpdate("INSERT INTO UserInfo VALUES('" + username + "', '" + password + "', 0");
+//                data.currentScore = 0;
+//                data.loginFlag = true;
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return data;
+//    }
 
     public boolean checkTableExists(String tableName) {
         boolean exists = false;
@@ -89,15 +126,5 @@ public class Database {
             System.err.println(ex.getMessage());
         }
         return exists;
-    }
-    
-    public void quitGame(int score, String username){
-        try{
-            Statement statement = this.conn.createStatement();
-            statement.executeUpdate("UPDATE UserInfo SET score-" + score+ " WHERE userid-" + username);
-        } catch (SQLException ex){
-            System.out.println("Error");
-        }
-        
     }
 }
