@@ -10,9 +10,7 @@ package Show_Ticket_Program;
  * @author JL Lopez
  */
 public class Data {
-    boolean loginFlag = false; 
-    boolean quitFlag = false; 
-    int currentScore = 0;
-    int num1 = 0;
-    int num2 = 0;
+    int goldTicks; 
+    int silverTicks; 
+    int bronzeTicks; 
 }
