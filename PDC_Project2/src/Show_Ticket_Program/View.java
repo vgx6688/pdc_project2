@@ -5,6 +5,10 @@
  */
 package Show_Ticket_Program;
 
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -12,7 +16,7 @@ import javax.swing.UIManager;
  *
  * @author JL Lopez
  */
-public class View extends javax.swing.JFrame {
+public class View extends JFrame implements Observer {
 
     /**
      * Creates new form view_trial
@@ -61,6 +65,14 @@ public class View extends javax.swing.JFrame {
         goldQuant = new javax.swing.JComboBox<>();
         silverQuant = new javax.swing.JComboBox<>();
         bronzeQuant = new javax.swing.JComboBox<>();
+        costLabel = new javax.swing.JLabel();
+        goldCost = new javax.swing.JLabel();
+        silverCost = new javax.swing.JLabel();
+        bronzeCost = new javax.swing.JLabel();
+        totalCost = new javax.swing.JLabel();
+        goldTotal = new javax.swing.JLabel();
+        silverTotal = new javax.swing.JLabel();
+        bronzeTotal = new javax.swing.JLabel();
         infoInputPanel = new javax.swing.JPanel();
         requiredInfo = new javax.swing.JLabel();
         userName = new javax.swing.JLabel();
@@ -69,6 +81,8 @@ public class View extends javax.swing.JFrame {
         phNumField = new javax.swing.JTextField();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        finalCostlabel = new javax.swing.JLabel();
+        finalCost = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainFrame"); // NOI18N
@@ -197,7 +211,7 @@ public class View extends javax.swing.JFrame {
 
         ticketTypes.setText("Select Ticket Types:");
 
-        ticketQuants.setText("Select Ticket Amount");
+        ticketQuants.setText("Select Ticket Quantity:");
 
         goldQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -205,49 +219,81 @@ public class View extends javax.swing.JFrame {
 
         bronzeQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        costLabel.setText("Cost:");
+
+        goldCost.setText("$30.00");
+
+        silverCost.setText("$21.00");
+
+        bronzeCost.setText("$12.00");
+
+        totalCost.setText("Total:");
+
+        goldTotal.setText("$0.00");
+
+        silverTotal.setText("$0.00");
+
+        bronzeTotal.setText("$0.00");
+
         javax.swing.GroupLayout inputShowPanelLayout = new javax.swing.GroupLayout(inputShowPanel);
         inputShowPanel.setLayout(inputShowPanelLayout);
         inputShowPanelLayout.setHorizontalGroup(
             inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputShowPanelLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(showsTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(goldCheckbox)
                             .addComponent(silverCheckbox)
-                            .addComponent(bronzeCheckbox))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addComponent(ticketTypes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ticketQuants))
-                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                            .addComponent(bronzeCheckbox)
+                            .addComponent(ticketTypes))
                         .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(inputShowPanelLayout.createSequentialGroup()
-                                .addComponent(showAButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(showBButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(showCButton))
-                            .addGroup(inputShowPanelLayout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(selectShow)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(116, 116, 116))
+                                .addGap(45, 45, 45)
+                                .addComponent(ticketQuants)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(62, 62, 62)))
+                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(goldCost)
+                            .addComponent(silverCost)
+                            .addComponent(bronzeCost)
+                            .addComponent(costLabel)))
+                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showAButton)
+                        .addGap(24, 24, 24)
+                        .addComponent(showBButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(showCButton)
+                        .addGap(11, 11, 11)))
+                .addGap(44, 44, 44)
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(totalCost)
+                    .addComponent(goldTotal)
+                    .addComponent(silverTotal)
+                    .addComponent(bronzeTotal))
+                .addGap(75, 75, 75))
+            .addGroup(inputShowPanelLayout.createSequentialGroup()
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(showsTitle))
+                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(selectShow)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         inputShowPanelLayout.setVerticalGroup(
             inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputShowPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(showsTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectShow)
@@ -256,23 +302,36 @@ public class View extends javax.swing.JFrame {
                     .addComponent(showBButton)
                     .addComponent(showCButton)
                     .addComponent(showAButton))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ticketTypes)
-                    .addComponent(ticketQuants))
+                    .addComponent(ticketQuants)
+                    .addComponent(costLabel)
+                    .addComponent(totalCost))
                 .addGap(18, 18, 18)
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goldCheckbox)
-                    .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(silverCheckbox)
-                    .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bronzeCheckbox)
-                    .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(goldCheckbox)
+                            .addComponent(goldCost)
+                            .addComponent(goldTotal))
+                        .addGap(18, 18, 18)
+                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(silverCheckbox)
+                            .addComponent(silverCost)
+                            .addComponent(silverTotal))
+                        .addGap(18, 18, 18)
+                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bronzeCheckbox)
+                            .addComponent(bronzeCost)
+                            .addComponent(bronzeTotal)))
+                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         requiredInfo.setText("User Information Required");
@@ -309,45 +368,61 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        finalCostlabel.setText("Total Cost:");
+
+        finalCost.setText("$0.00");
+
         javax.swing.GroupLayout infoInputPanelLayout = new javax.swing.GroupLayout(infoInputPanel);
         infoInputPanel.setLayout(infoInputPanelLayout);
         infoInputPanelLayout.setHorizontalGroup(
             infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoInputPanelLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(33, 33, 33)
                 .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userPhNum)
-                    .addComponent(userName))
-                .addGap(18, 18, 18)
-                .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nameField)
-                    .addComponent(phNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(confirmButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(41, 41, 41))
-            .addGroup(infoInputPanelLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(requiredInfo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(infoInputPanelLayout.createSequentialGroup()
+                        .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(userPhNum)
+                            .addComponent(userName))
+                        .addGap(18, 18, 18)
+                        .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nameField)
+                            .addComponent(phNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(infoInputPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(infoInputPanelLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(finalCostlabel)
+                                .addGap(46, 46, 46)
+                                .addComponent(finalCost)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(infoInputPanelLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(requiredInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43))
         );
         infoInputPanelLayout.setVerticalGroup(
             infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(requiredInfo)
-                .addGap(19, 19, 19)
+                .addGap(20, 20, 20)
                 .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userName)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(finalCostlabel)
+                    .addComponent(finalCost))
                 .addGap(22, 22, 22)
                 .addGroup(infoInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userPhNum)
                     .addComponent(phNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -359,7 +434,7 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(inputShowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(titlePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                    .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(infoInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -369,7 +444,7 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inputShowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -410,12 +485,12 @@ public class View extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        int cancel = JOptionPane.showConfirmDialog(rootPane, "Cancel booking?", "Cancel Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(rootPane, "Please double check inputs then   press Yes to confirm booking.", "Booking Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                  
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
@@ -454,13 +529,20 @@ public class View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox bronzeCheckbox;
+    private javax.swing.JLabel bronzeCost;
     private javax.swing.JComboBox<String> bronzeQuant;
+    private javax.swing.JLabel bronzeTotal;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JLabel costLabel;
     private javax.swing.JLabel detailsLabel;
     private javax.swing.JPanel detailsPanel;
+    private javax.swing.JLabel finalCost;
+    private javax.swing.JLabel finalCostlabel;
     private javax.swing.JCheckBox goldCheckbox;
+    private javax.swing.JLabel goldCost;
     private javax.swing.JComboBox<String> goldQuant;
+    private javax.swing.JLabel goldTotal;
     private javax.swing.JPanel infoInputPanel;
     private javax.swing.JPanel inputShowPanel;
     private javax.swing.JTextField nameField;
@@ -485,12 +567,25 @@ public class View extends javax.swing.JFrame {
     private javax.swing.ButtonGroup showsButtonGroup;
     private javax.swing.JLabel showsTitle;
     private javax.swing.JCheckBox silverCheckbox;
+    private javax.swing.JLabel silverCost;
     private javax.swing.JComboBox<String> silverQuant;
+    private javax.swing.JLabel silverTotal;
     private javax.swing.JLabel ticketQuants;
     private javax.swing.JLabel ticketTypes;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
+    private javax.swing.JLabel totalCost;
     private javax.swing.JLabel userName;
     private javax.swing.JLabel userPhNum;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void addActionListener(ActionListener listener){
+        this.confirmButton.addActionListener(listener);
+        this.cancelButton.addActionListener(listener);
+    }
 }
