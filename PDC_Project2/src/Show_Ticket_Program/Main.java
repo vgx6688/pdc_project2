@@ -16,10 +16,10 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       // View view = new View();
-       // view.setVisible(true);
+        View view = new View();
         Model model = new Model();
-        //Controller controller = new Controller(view, model);
+        Controller controller = new Controller(view, model);
+        view.setVisible(true);
     }
-    
+
 }
