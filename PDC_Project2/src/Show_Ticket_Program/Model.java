@@ -5,10 +5,21 @@
  */
 package Show_Ticket_Program;
 
+import java.util.Observable;
+
 /**
  *
  * @author JL Lopez
  */
-public class Model {
+public class Model extends Observable {
+
+    public Database db;
+    public Data data;
+
+    public Model() {
+        this.db = new Database(); 
+        this.db.dbsetup();
+    }
+    
     
 }
