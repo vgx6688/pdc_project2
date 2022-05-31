@@ -21,5 +21,4 @@ public class Model extends Observable {
         this.db.dbsetup();
     }
     
-    
 }
