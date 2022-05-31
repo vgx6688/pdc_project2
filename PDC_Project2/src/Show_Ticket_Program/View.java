@@ -95,102 +95,60 @@ public class View extends javax.swing.JFrame {
         );
 
         detailsPanel.setPreferredSize(new java.awt.Dimension(520, 166));
+        detailsPanel.setLayout(null);
 
         detailsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         detailsLabel.setText("Show Details");
+        detailsPanel.add(detailsLabel);
+        detailsLabel.setBounds(210, 6, 102, 25);
 
         showATitle.setText("SHOW A - May 27, 2022 ");
+        detailsPanel.add(showATitle);
+        showATitle.setBounds(30, 40, 163, 21);
 
         showAGold.setText("Gold Tickets left: ???");
+        detailsPanel.add(showAGold);
+        showAGold.setBounds(30, 70, 135, 21);
 
         showASilver.setText("Silver Tickets left: ???");
+        detailsPanel.add(showASilver);
+        showASilver.setBounds(30, 100, 139, 21);
 
         showABronze.setText("Bronze Tickets left: ???");
+        detailsPanel.add(showABronze);
+        showABronze.setBounds(30, 130, 149, 21);
 
         showBTitle.setText("SHOW B - May 28, 2022 ");
+        detailsPanel.add(showBTitle);
+        showBTitle.setBounds(200, 40, 182, 21);
 
         showCTitle.setText("SHOW C - May 29, 2022 ");
+        detailsPanel.add(showCTitle);
+        showCTitle.setBounds(370, 40, 162, 21);
 
         showBGold.setText("Gold Tickets left: ???");
+        detailsPanel.add(showBGold);
+        showBGold.setBounds(200, 70, 139, 21);
 
         showBSilver.setText("Silver Tickets left: ???");
+        detailsPanel.add(showBSilver);
+        showBSilver.setBounds(200, 100, 139, 21);
 
         showBBronze.setText("Bronze Tickets left: ???");
+        detailsPanel.add(showBBronze);
+        showBBronze.setBounds(200, 130, 149, 21);
 
         showCBronze.setText("Bronze Tickets left: ???");
+        detailsPanel.add(showCBronze);
+        showCBronze.setBounds(370, 130, 149, 21);
 
         showCSilver.setText("Silver Tickets left: ???");
+        detailsPanel.add(showCSilver);
+        showCSilver.setBounds(370, 100, 139, 21);
 
         showCGold.setText("Gold Tickets left: ???");
-
-        javax.swing.GroupLayout detailsPanelLayout = new javax.swing.GroupLayout(detailsPanel);
-        detailsPanel.setLayout(detailsPanelLayout);
-        detailsPanelLayout.setHorizontalGroup(
-            detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(detailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailsPanelLayout.createSequentialGroup()
-                        .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(showAGold)
-                            .addComponent(showASilver)
-                            .addComponent(showABronze))
-                        .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(detailsPanelLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(showBGold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
-                            .addGroup(detailsPanelLayout.createSequentialGroup()
-                                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(detailsPanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(showBSilver))
-                                    .addGroup(detailsPanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(showBBronze)))
-                                .addGap(27, 27, 27)
-                                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(showCBronze)
-                                    .addComponent(showCGold)
-                                    .addComponent(showCSilver))
-                                .addGap(30, 30, 30))))
-                    .addGroup(detailsPanelLayout.createSequentialGroup()
-                        .addComponent(showATitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(showBTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(showCTitle)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(detailsPanelLayout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(detailsLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        detailsPanelLayout.setVerticalGroup(
-            detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(detailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(detailsLabel)
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showATitle)
-                    .addComponent(showBTitle)
-                    .addComponent(showCTitle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showAGold)
-                    .addComponent(showBGold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(showCGold))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showASilver)
-                    .addComponent(showBSilver, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showCSilver))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showABronze)
-                    .addComponent(showBBronze)
-                    .addComponent(showCBronze)))
-        );
+        detailsPanel.add(showCGold);
+        showCGold.setBounds(370, 70, 135, 21);
 
         showsTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         showsTitle.setText("Book");
@@ -401,7 +359,7 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(inputShowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(titlePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                     .addComponent(infoInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -457,7 +415,7 @@ public class View extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(rootPane, "Please double check inputs then press Yes to confirm booking.", "Booking Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int confirm = JOptionPane.showConfirmDialog(rootPane, "Please double check inputs then   press Yes to confirm booking.", "Booking Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
