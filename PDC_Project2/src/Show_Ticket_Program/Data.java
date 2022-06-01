@@ -10,7 +10,11 @@ package Show_Ticket_Program;
  * @author JL Lopez
  */
 public class Data {
+    String show = ""; 
     int goldTicks; 
     int silverTicks; 
-    int bronzeTicks; 
+    int bronzeTicks;
+    boolean display = true; 
+    boolean chosen = false;
+    boolean update = false;
 }

@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -120,9 +119,9 @@ public class View extends JFrame implements Observer {
         detailsPanel.add(showATitle);
         showATitle.setBounds(30, 40, 163, 21);
 
-        showAGold.setText("Gold Tickets left: ???");
+        showAGold.setText("Gold Tickets Left: ");
         detailsPanel.add(showAGold);
-        showAGold.setBounds(30, 70, 135, 21);
+        showAGold.setBounds(30, 70, 117, 21);
 
         showASilver.setText("Silver Tickets left: ???");
         detailsPanel.add(showASilver);
@@ -581,11 +580,24 @@ public class View extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Data data = (Data) arg;
+        if(!data.display){
+            if(data.show == "A"){
+                 showAGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
+                 showASilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
+                 showABronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
+                 detailsPanel.repaint();
+            }
+           
+        }
     }
     
     public void addActionListener(ActionListener listener){
         this.confirmButton.addActionListener(listener);
         this.cancelButton.addActionListener(listener);
+    }
+    
+    public void displayData(Data data){
+        
     }
 }

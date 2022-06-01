@@ -22,6 +22,8 @@ public class Controller implements ActionListener {
         this.view = view;
         this.model = model;
         this.view.addActionListener(this);
+        model.displayData();
+        view.setVisible(true);
     }
     
     

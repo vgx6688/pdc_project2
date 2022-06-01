@@ -18,8 +18,8 @@ public class Main {
         // TODO code application logic here
         View view = new View();
         Model model = new Model();
+        model.addObserver(view);
         Controller controller = new Controller(view, model);
-        view.setVisible(true);
     }
 
 }

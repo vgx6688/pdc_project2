@@ -24,28 +24,26 @@ public class Database {
     String dbpassword = "pdc";
 
     public void dbsetup() {
-        try{
+        try {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             this.createTable("ShowsInfo");
             this.createTable("TicketsInfo");
             this.createTable("ShowsABookings");
             this.createTable("ShowsBBookings");
             this.createTable("ShowsCBookings");
-        } catch(Throwable e){
+        } catch (Throwable e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
 
     public void createTable(String tableName) {
         try {
-            Statement statement = conn.createStatement();
+            Statement statement = this.conn.createStatement();
             if (!checkTableExists(tableName)) {
                 if (tableName.equalsIgnoreCase("ShowsInfo")) {
-                    statement.executeUpdate("CREATE TABLE " + tableName + " (showID VARCHAR(1), date DATE, goldticket INT, silverticket INT, bronzeticket INT)");
                     this.insertTableData(tableName);
                 } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
-                    statement.executeUpdate("CREATE TABLE " + tableName + " (tickettype VARCHAR(10), price INT)");
                     this.insertTableData(tableName);
                 } else {
                     statement.executeUpdate("CREATE TABLE " + tableName + " (bookingid VARCHAR(10), name VARCHAR(12), goldticket INT, silverticket INT, bronzeticket INT)");
@@ -58,25 +56,25 @@ public class Database {
     }
 
     public void insertTableData(String tableName) {
-        try{
+        try {
             Statement statement = conn.createStatement();
             if (tableName.equalsIgnoreCase("ShowsInfo")) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (showID VARCHAR(1), date DATE, goldticket INT, silverticket INT, bronzeticket INT)");
-                statement.addBatch("INSERT INTO " + tableName + " VALUES('A', 21/05/2022, 11, 12, 13)");
-                statement.addBatch("INSERT INTO " + tableName + " VALUES('B', 26/05/2022, 21, 22, 23)");
-                statement.addBatch("INSERT INTO " + tableName + " VALUES('C', 31/05/2022, 31, 32, 33)");
+                statement.addBatch("CREATE TABLE " + tableName + " (showID VARCHAR(1), date DATE, goldticket INT, silverticket INT, bronzeticket INT)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('A', '2022-05-27', 11, 12, 13)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('B', '2022-05-29', 21, 22, 23)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('C', '2022-05-31', 31, 32, 33)");
                 statement.executeBatch();
             } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (tickettype VARCHAR(10), price INT)");
+                statement.addBatch("CREATE TABLE " + tableName + " (tickettype VARCHAR(10), price INT)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('Gold', 30)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('Silver', 21)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('Bronze', 12)");
                 statement.executeBatch();
-            }  
-        } catch(Throwable e){
+            }
+        } catch (Throwable e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
 
     public boolean checkTableExists(String tableName) {
@@ -85,10 +83,10 @@ public class Database {
             DatabaseMetaData dbmd = this.conn.getMetaData();
             String[] types = {"TABLE"};
             ResultSet rs = dbmd.getTables(null, null, null, types);
-
             while (rs.next()) {
                 String table_name = rs.getString("TABLE_NAME");
                 if (table_name.equalsIgnoreCase(tableName)) {
+                    System.out.println(tableName + " " + table_name);
                     exists = true;
                 }
             }
@@ -97,5 +95,22 @@ public class Database {
             System.err.println(ex.getMessage());
         }
         return exists;
+    }
+
+    public Data displayData(String show) {
+        Data data = new Data();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM ShowsInfo");
+            if (rs.next()) {
+                data.show = rs.getString("showID");
+                data.goldTicks = rs.getInt("goldticket");
+                data.silverTicks = rs.getInt("silverticket");
+                data.bronzeTicks = rs.getInt("bronzeticket");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return data;
     }
 }
