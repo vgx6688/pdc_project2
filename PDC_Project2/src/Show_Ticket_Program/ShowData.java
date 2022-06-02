@@ -9,8 +9,9 @@ package Show_Ticket_Program;
  *
  * @author JL Lopez
  */
-public class Data {
+public class ShowData {
     String show = ""; 
+    String date = "";
     int goldTicks; 
     int silverTicks; 
     int bronzeTicks;
