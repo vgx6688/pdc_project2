@@ -64,12 +64,24 @@ public class Database {
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('B', '2022-05-29', 21, 22, 23)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('C', '2022-05-31', 31, 32, 33)");
                 statement.executeBatch();
+
+//                ResultSet rs = statement.executeQuery("SELECT * FROM ShowsInfo");
+//                while (rs.next()) {
+//                    String id = rs.getString("showID");
+//                    System.out.println(id);
+//                }
             } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
                 statement.addBatch("CREATE TABLE " + tableName + " (tickettype VARCHAR(10), price INT)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('Gold', 30)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('Silver', 21)");
                 statement.addBatch("INSERT INTO " + tableName + " VALUES('Bronze', 12)");
                 statement.executeBatch();
+
+//                ResultSet rs = statement.executeQuery("SELECT * FROM TicketsInfo");
+//                while(rs.next()){
+//                    String type =  rs.getString("tickettype");
+//                    System.out.println(type);
+//                }
             }
         } catch (Throwable e) {
             System.out.println(e.getMessage());
@@ -86,7 +98,7 @@ public class Database {
             while (rs.next()) {
                 String table_name = rs.getString("TABLE_NAME");
                 if (table_name.equalsIgnoreCase(tableName)) {
-                    System.out.println(tableName + " " + table_name);
+                    //System.out.println(tableName + " " + table_name);
                     exists = true;
                 }
             }
@@ -97,16 +109,19 @@ public class Database {
         return exists;
     }
 
-    public Data displayData(String show) {
-        Data data = new Data();
+    public ShowData displayData(String show) {
+        ShowData data = new ShowData();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM ShowsInfo");
+            ResultSet rs = statement.executeQuery("SELECT * FROM ShowsInfo WHERE showID = '" + show + "'");
             if (rs.next()) {
                 data.show = rs.getString("showID");
+                data.date = rs.getString("date");
                 data.goldTicks = rs.getInt("goldticket");
                 data.silverTicks = rs.getInt("silverticket");
                 data.bronzeTicks = rs.getInt("bronzeticket");
+                
+//                System.out.println(String.format("%s, %s, %d, %d, %d", data.show, data.date, data.goldTicks, data.silverTicks, data.bronzeTicks));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
