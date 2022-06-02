@@ -129,11 +129,11 @@
         </Component>
         <Component class="javax.swing.JLabel" name="showAGold">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Gold Tickets Left: "/>
+            <Property name="text" type="java.lang.String" value="Gold Tickets Left: ???"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="70" width="-1" height="-1"/>
+              <AbsoluteConstraints x="30" y="70" width="150" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -247,12 +247,12 @@
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="goldCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="silverCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="bronzeCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="ticketTypes" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="silverTickets" min="-2" max="-2" attributes="0"/>
+                              <Component id="goldTickets" min="-2" max="-2" attributes="0"/>
+                              <Component id="bronzeTickets" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="ticketTypes" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -267,7 +267,7 @@
                                       <Component id="goldQuant" min="-2" max="-2" attributes="0"/>
                                       <Component id="bronzeQuant" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -331,28 +331,37 @@
                       <Component id="costLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="totalCost" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="goldCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="goldCost" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="goldTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="silverCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="silverCost" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="silverTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bronzeCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="bronzeCost" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="bronzeTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="goldCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="goldTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="silverCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="silverTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="bronzeCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="bronzeTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="goldTickets" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="silverTickets" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bronzeTickets" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="goldQuant" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="silverQuant" min="-2" max="-2" attributes="0"/>
@@ -407,27 +416,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showCButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="goldCheckbox">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Gold Tickets"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="silverCheckbox">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Silver Tickets"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="silverCheckboxActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="bronzeCheckbox">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Bronze Tickets"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bronzeCheckboxActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="selectShow">
           <Properties>
             <Property name="text" type="java.lang.String" value="Select a show:"/>
@@ -435,7 +423,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ticketTypes">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Select Ticket Types:"/>
+            <Property name="text" type="java.lang.String" value="Ticket Types:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="ticketQuants">
@@ -446,46 +434,43 @@
         <Component class="javax.swing.JComboBox" name="goldQuant">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="0"/>
               </StringArray>
             </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Gold Ticket"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="silverQuant">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="0"/>
               </StringArray>
             </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Silver Ticket"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="bronzeQuant">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="0"/>
               </StringArray>
             </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Bronze Ticket"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="costLabel">
@@ -528,6 +513,21 @@
             <Property name="text" type="java.lang.String" value="$0.00"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="goldTickets">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gold Ticket"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="silverTickets">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Silver Ticket"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="bronzeTickets">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bronze Ticket"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="infoInputPanel">
@@ -560,7 +560,6 @@
                                   <Component id="finalCostlabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                   <Component id="finalCost" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

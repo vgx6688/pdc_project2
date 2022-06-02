@@ -55,9 +55,6 @@ public class View extends JFrame implements Observer {
         showAButton = new javax.swing.JRadioButton();
         showBButton = new javax.swing.JRadioButton();
         showCButton = new javax.swing.JRadioButton();
-        goldCheckbox = new javax.swing.JCheckBox();
-        silverCheckbox = new javax.swing.JCheckBox();
-        bronzeCheckbox = new javax.swing.JCheckBox();
         selectShow = new javax.swing.JLabel();
         ticketTypes = new javax.swing.JLabel();
         ticketQuants = new javax.swing.JLabel();
@@ -72,6 +69,9 @@ public class View extends JFrame implements Observer {
         goldTotal = new javax.swing.JLabel();
         silverTotal = new javax.swing.JLabel();
         bronzeTotal = new javax.swing.JLabel();
+        goldTickets = new javax.swing.JLabel();
+        silverTickets = new javax.swing.JLabel();
+        bronzeTickets = new javax.swing.JLabel();
         infoInputPanel = new javax.swing.JPanel();
         requiredInfo = new javax.swing.JLabel();
         userName = new javax.swing.JLabel();
@@ -119,9 +119,9 @@ public class View extends JFrame implements Observer {
         detailsPanel.add(showATitle);
         showATitle.setBounds(30, 40, 163, 21);
 
-        showAGold.setText("Gold Tickets Left: ");
+        showAGold.setText("Gold Tickets Left: ???");
         detailsPanel.add(showAGold);
-        showAGold.setBounds(30, 70, 117, 21);
+        showAGold.setBounds(30, 70, 150, 21);
 
         showASilver.setText("Silver Tickets left: ???");
         detailsPanel.add(showASilver);
@@ -190,33 +190,20 @@ public class View extends JFrame implements Observer {
             }
         });
 
-        goldCheckbox.setText("Gold Tickets");
-
-        silverCheckbox.setText("Silver Tickets");
-        silverCheckbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                silverCheckboxActionPerformed(evt);
-            }
-        });
-
-        bronzeCheckbox.setText("Bronze Tickets");
-        bronzeCheckbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bronzeCheckboxActionPerformed(evt);
-            }
-        });
-
         selectShow.setText("Select a show:");
 
-        ticketTypes.setText("Select Ticket Types:");
+        ticketTypes.setText("Ticket Types:");
 
         ticketQuants.setText("Select Ticket Quantity:");
 
-        goldQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        goldQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0" }));
+        goldQuant.setActionCommand("Gold Ticket");
 
-        silverQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        silverQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0" }));
+        silverQuant.setActionCommand("Silver Ticket");
 
-        bronzeQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bronzeQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0" }));
+        bronzeQuant.setActionCommand("Bronze Ticket");
 
         costLabel.setText("Cost:");
 
@@ -234,6 +221,12 @@ public class View extends JFrame implements Observer {
 
         bronzeTotal.setText("$0.00");
 
+        goldTickets.setText("Gold Ticket");
+
+        silverTickets.setText("Silver Ticket");
+
+        bronzeTickets.setText("Bronze Ticket");
+
         javax.swing.GroupLayout inputShowPanelLayout = new javax.swing.GroupLayout(inputShowPanel);
         inputShowPanel.setLayout(inputShowPanelLayout);
         inputShowPanelLayout.setHorizontalGroup(
@@ -241,11 +234,11 @@ public class View extends JFrame implements Observer {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
                 .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(40, 40, 40)
                         .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(goldCheckbox)
-                            .addComponent(silverCheckbox)
-                            .addComponent(bronzeCheckbox)
+                            .addComponent(silverTickets)
+                            .addComponent(goldTickets)
+                            .addComponent(bronzeTickets)
                             .addComponent(ticketTypes))
                         .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(inputShowPanelLayout.createSequentialGroup()
@@ -258,7 +251,7 @@ public class View extends JFrame implements Observer {
                                     .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(62, 62, 62)))
+                                .addGap(97, 97, 97)))
                         .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(goldCost)
                             .addComponent(silverCost)
@@ -307,24 +300,30 @@ public class View extends JFrame implements Observer {
                     .addComponent(ticketQuants)
                     .addComponent(costLabel)
                     .addComponent(totalCost))
-                .addGap(18, 18, 18)
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(goldCheckbox)
-                            .addComponent(goldCost)
-                            .addComponent(goldTotal))
-                        .addGap(18, 18, 18)
-                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(silverCheckbox)
-                            .addComponent(silverCost)
-                            .addComponent(silverTotal))
-                        .addGap(18, 18, 18)
-                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bronzeCheckbox)
-                            .addComponent(bronzeCost)
-                            .addComponent(bronzeTotal)))
+                        .addGap(26, 26, 26)
+                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(inputShowPanelLayout.createSequentialGroup()
+                                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(goldCost)
+                                    .addComponent(goldTotal))
+                                .addGap(18, 18, 18)
+                                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(silverCost)
+                                    .addComponent(silverTotal))
+                                .addGap(18, 18, 18)
+                                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bronzeCost)
+                                    .addComponent(bronzeTotal)))
+                            .addGroup(inputShowPanelLayout.createSequentialGroup()
+                                .addComponent(goldTickets)
+                                .addGap(18, 18, 18)
+                                .addComponent(silverTickets)
+                                .addGap(18, 18, 18)
+                                .addComponent(bronzeTickets))))
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,8 +395,7 @@ public class View extends JFrame implements Observer {
                                 .addGap(44, 44, 44)
                                 .addComponent(finalCostlabel)
                                 .addGap(46, 46, 46)
-                                .addComponent(finalCost)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(finalCost))))
                     .addGroup(infoInputPanelLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(requiredInfo)
@@ -466,14 +464,6 @@ public class View extends JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_showCButtonActionPerformed
 
-    private void silverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_silverCheckboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_silverCheckboxActionPerformed
-
-    private void bronzeCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bronzeCheckboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bronzeCheckboxActionPerformed
-
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
@@ -484,12 +474,12 @@ public class View extends JFrame implements Observer {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-                  
+
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
@@ -527,9 +517,9 @@ public class View extends JFrame implements Observer {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox bronzeCheckbox;
     private javax.swing.JLabel bronzeCost;
-    private javax.swing.JComboBox<String> bronzeQuant;
+    public javax.swing.JComboBox<String> bronzeQuant;
+    private javax.swing.JLabel bronzeTickets;
     private javax.swing.JLabel bronzeTotal;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
@@ -538,9 +528,9 @@ public class View extends JFrame implements Observer {
     private javax.swing.JPanel detailsPanel;
     private javax.swing.JLabel finalCost;
     private javax.swing.JLabel finalCostlabel;
-    private javax.swing.JCheckBox goldCheckbox;
     private javax.swing.JLabel goldCost;
-    private javax.swing.JComboBox<String> goldQuant;
+    public javax.swing.JComboBox<String> goldQuant;
+    private javax.swing.JLabel goldTickets;
     private javax.swing.JLabel goldTotal;
     private javax.swing.JPanel infoInputPanel;
     private javax.swing.JPanel inputShowPanel;
@@ -565,9 +555,9 @@ public class View extends JFrame implements Observer {
     private javax.swing.JLabel showCTitle;
     private javax.swing.ButtonGroup showsButtonGroup;
     private javax.swing.JLabel showsTitle;
-    private javax.swing.JCheckBox silverCheckbox;
     private javax.swing.JLabel silverCost;
-    private javax.swing.JComboBox<String> silverQuant;
+    public javax.swing.JComboBox<String> silverQuant;
+    private javax.swing.JLabel silverTickets;
     private javax.swing.JLabel silverTotal;
     private javax.swing.JLabel ticketQuants;
     private javax.swing.JLabel ticketTypes;
@@ -580,24 +570,54 @@ public class View extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        Data data = (Data) arg;
-        if(!data.display){
-            if(data.show == "A"){
-                 showAGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
-                 showASilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
-                 showABronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
-                 detailsPanel.repaint();
+        ShowData data = (ShowData) arg;
+        if (!data.display) {
+            if (data.show.equalsIgnoreCase("A")) {
+//                System.out.println("Changing text...");
+                showATitle.setText("Show A (" + data.date +")");
+                showAGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
+                showASilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
+                showABronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
+                detailsPanel.repaint();
+            } else if (data.show.equalsIgnoreCase("B")) {
+                showBTitle.setText("Show B (" + data.date +")");
+                showBGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
+                showBSilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
+                showBBronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
+                detailsPanel.repaint();
+            } else {
+                showCTitle.setText("Show C (" + data.date +")");
+                showCGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
+                showCSilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
+                showCBronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
+                detailsPanel.repaint();
             }
-           
+        } else if (data.chosen) {
+//            System.out.println("Updating JComboBoxes...");
+            goldQuant.removeAllItems();
+            silverQuant.removeAllItems();
+            bronzeQuant.removeAllItems();
+            for (int i = 0; i <= data.goldTicks; i++) {
+                goldQuant.addItem(Integer.toString(i));
+            }
+            for(int i = 0; i <= data.silverTicks; i++){
+                silverQuant.addItem(Integer.toString(i));
+            }
+            for(int i = 0; i <= data.bronzeTicks; i++){
+                bronzeQuant.addItem(Integer.toString(i));
+            }
+            inputShowPanel.repaint();
         }
     }
-    
-    public void addActionListener(ActionListener listener){
+
+    public void addActionListener(ActionListener listener) {
+        this.showAButton.addActionListener(listener);
+        this.showBButton.addActionListener(listener);
+        this.showCButton.addActionListener(listener);
+        this.goldQuant.addActionListener(listener);
+        this.silverQuant.addActionListener(listener);
+        this.bronzeQuant.addActionListener(listener);
         this.confirmButton.addActionListener(listener);
         this.cancelButton.addActionListener(listener);
-    }
-    
-    public void displayData(Data data){
-        
     }
 }
