@@ -14,7 +14,10 @@ import java.util.Observable;
 public class Model extends Observable {
 
     public Database db;
-    public Data data;
+    private ShowData showAData = new ShowData();
+    private ShowData showBData = new ShowData();
+    private ShowData showCData = new ShowData();
+    private TicketData ticketData = new TicketData();
     String show = "";
 
     public Model() {
@@ -23,35 +26,78 @@ public class Model extends Observable {
     }
 
     public void displayData() {
-        Data showAData = new Data();
-        Data showBData = new Data(); 
-        Data showCData = new Data(); 
         for (int i = 0; i < 3; i++) {
             switch (i) {
                 case 0:
                     showAData.show = "A";
                     showAData = db.displayData(showAData.show);
                     showAData.display = false;
+//                    System.out.println("Show A ShowData done");
                     this.setChanged();
                     this.notifyObservers(showAData);
+                    showAData.display = true;
                     break;
                 case 1:
                     showBData.show = "B";
                     showBData = db.displayData(showBData.show);
                     showBData.display = false;
+//                    System.out.println("Show B ShowData done");
                     this.setChanged();
                     this.notifyObservers(showBData);
+                    showBData.display = true;
                     break;
                 case 2:
                     showCData.show = "C";
                     showCData = db.displayData(showCData.show);
+//                    System.out.println("Show C ShowData done");
                     showCData.display = false;
                     this.setChanged();
                     this.notifyObservers(showCData);
+                    showCData.display = true;
                     break;
                 default:
                     break;
-            }   
+            }
+        }
+    }
+
+    public void updateBoxes(String show) {
+        switch (show) {
+            case "A":
+                showAData.chosen = true;
+                this.setChanged();
+                this.notifyObservers(showAData);
+                break;
+            case "B":
+                showBData.chosen = true;
+                this.setChanged();
+                this.notifyObservers(showBData);
+                break;
+            case "C":
+                showCData.chosen = true;
+                this.setChanged();
+                this.notifyObservers(showCData);
+            default:
+                break;
+        }
+    }
+
+    public void updateTotalCost(String type, int quantity) {
+        TicketData data = new TicketData();
+        data.show = null;
+        data.date = null;
+        data.display = false;
+
+        switch (type) {
+            case "G":
+                
+                break;
+            case "S":
+                break;
+            case "B":
+                break;
+            default:
+                break;
         }
     }
 }
