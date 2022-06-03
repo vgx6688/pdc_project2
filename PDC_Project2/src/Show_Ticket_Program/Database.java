@@ -117,11 +117,30 @@ public class Database {
             if (rs.next()) {
                 data.show = rs.getString("showID");
                 data.date = rs.getString("date");
-                data.goldTicks = rs.getInt("goldticket");
-                data.silverTicks = rs.getInt("silverticket");
-                data.bronzeTicks = rs.getInt("bronzeticket");
-                
+                data.goldTicks.quantity = rs.getInt("goldticket");
+                data.silverTicks.quantity = rs.getInt("silverticket");
+                data.bronzeTicks.quantity = rs.getInt("bronzeticket");
+
 //                System.out.println(String.format("%s, %s, %d, %d, %d", data.show, data.date, data.goldTicks, data.silverTicks, data.bronzeTicks));
+
+            rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Gold'");
+            if(rs.next()){
+                data.goldTicks.price = rs.getInt("price");
+                System.out.println(data.goldTicks.price);
+            }
+            
+            rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Silver'");
+            if(rs.next()){
+                data.silverTicks.price = rs.getInt("price");
+                System.out.println(data.silverTicks.price);
+            }
+            
+            rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Bronze'");
+            if(rs.next()){
+                data.bronzeTicks.price = rs.getInt("price");
+                System.out.println(data.bronzeTicks.price);
+            }
+            
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
