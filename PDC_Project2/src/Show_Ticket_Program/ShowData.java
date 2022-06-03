@@ -12,9 +12,9 @@ package Show_Ticket_Program;
 public class ShowData {
     String show = ""; 
     String date = "";
-    int goldTicks; 
-    int silverTicks; 
-    int bronzeTicks;
+    TicketData goldTicks = new TicketData(); 
+    TicketData silverTicks = new TicketData(); 
+    TicketData bronzeTicks = new TicketData();
     boolean display = true; 
     boolean chosen = false;
     boolean update = false;
