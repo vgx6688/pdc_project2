@@ -111,9 +111,9 @@ public class View extends JFrame implements Observer {
         detailsPanel.setLayout(null);
 
         detailsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        detailsLabel.setText("Show Details");
+        detailsLabel.setText("Show - Tickets Left");
         detailsPanel.add(detailsLabel);
-        detailsLabel.setBounds(210, 6, 102, 25);
+        detailsLabel.setBounds(190, 0, 160, 25);
 
         showATitle.setText("SHOW A - May 27, 2022 ");
         detailsPanel.add(showATitle);
@@ -194,7 +194,7 @@ public class View extends JFrame implements Observer {
 
         ticketTypes.setText("Ticket Types:");
 
-        ticketQuants.setText("Select Ticket Quantity:");
+        ticketQuants.setText("Select Quantity:");
 
         goldQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0" }));
         goldQuant.setActionCommand("Gold Ticket");
@@ -221,50 +221,40 @@ public class View extends JFrame implements Observer {
 
         bronzeTotal.setText("$0.00");
 
-        goldTickets.setText("Gold Ticket");
+        goldTickets.setText("Gold");
 
-        silverTickets.setText("Silver Ticket");
+        silverTickets.setText("Silver");
 
-        bronzeTickets.setText("Bronze Ticket");
+        bronzeTickets.setText("Bronze");
 
         javax.swing.GroupLayout inputShowPanelLayout = new javax.swing.GroupLayout(inputShowPanel);
         inputShowPanel.setLayout(inputShowPanelLayout);
         inputShowPanelLayout.setHorizontalGroup(
             inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(40, 40, 40)
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(silverTickets)
+                    .addComponent(goldTickets)
+                    .addComponent(bronzeTickets)
+                    .addComponent(ticketTypes))
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(silverTickets)
-                            .addComponent(goldTickets)
-                            .addComponent(bronzeTickets)
-                            .addComponent(ticketTypes))
-                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inputShowPanelLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(ticketQuants)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(97, 97, 97)))
-                        .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(goldCost)
-                            .addComponent(silverCost)
-                            .addComponent(bronzeCost)
-                            .addComponent(costLabel)))
+                            .addComponent(silverQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bronzeQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(97, 97, 97))
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(showAButton)
-                        .addGap(24, 24, 24)
-                        .addComponent(showBButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(showCButton)
-                        .addGap(11, 11, 11)))
+                        .addGap(68, 68, 68)
+                        .addComponent(ticketQuants)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(goldCost)
+                    .addComponent(silverCost)
+                    .addComponent(bronzeCost)
+                    .addComponent(costLabel))
                 .addGap(44, 44, 44)
                 .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(totalCost)
@@ -275,26 +265,33 @@ public class View extends JFrame implements Observer {
             .addGroup(inputShowPanelLayout.createSequentialGroup()
                 .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addGap(226, 226, 226)
+                        .addGap(202, 202, 202)
+                        .addComponent(selectShow))
+                    .addGroup(inputShowPanelLayout.createSequentialGroup()
+                        .addGap(235, 235, 235)
                         .addComponent(showsTitle))
                     .addGroup(inputShowPanelLayout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(selectShow)))
+                        .addGap(100, 100, 100)
+                        .addComponent(showAButton)
+                        .addGap(28, 28, 28)
+                        .addComponent(showBButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(showCButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         inputShowPanelLayout.setVerticalGroup(
             inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputShowPanelLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(showsTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(showsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(selectShow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showBButton)
-                    .addComponent(showCButton)
+                .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(showBButton)
+                        .addComponent(showCButton))
                     .addComponent(showAButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(inputShowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ticketTypes)
                     .addComponent(ticketQuants)
@@ -419,7 +416,7 @@ public class View extends JFrame implements Observer {
                     .addComponent(phNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -441,7 +438,7 @@ public class View extends JFrame implements Observer {
                 .addContainerGap()
                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inputShowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -574,39 +571,57 @@ public class View extends JFrame implements Observer {
         if (!data.display) {
             if (data.show.equalsIgnoreCase("A")) {
 //                System.out.println("Changing text...");
-                showATitle.setText("Show A (" + data.date +")");
-                showAGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
-                showASilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
-                showABronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
-                detailsPanel.repaint();
+                showATitle.setText("Show A   " + data.date);
+                showAGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
+                showASilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
+                showABronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
             } else if (data.show.equalsIgnoreCase("B")) {
-                showBTitle.setText("Show B (" + data.date +")");
-                showBGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
-                showBSilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
-                showBBronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
-                detailsPanel.repaint();
+                showBTitle.setText("Show B   " + data.date);
+                showBGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
+                showBSilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
+                showBBronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
             } else {
-                showCTitle.setText("Show C (" + data.date +")");
-                showCGold.setText("Gold Tickets Left: " + Integer.toString(data.goldTicks));
-                showCSilver.setText("Silver Tickets Left: " + Integer.toString(data.silverTicks));
-                showCBronze.setText("Bronze Tickets Left: " + Integer.toString(data.bronzeTicks));
-                detailsPanel.repaint();
+                showCTitle.setText("Show C   " + data.date);
+                showCGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
+                showCSilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
+                showCBronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
             }
+
+            goldCost.setText(String.format("$%.2f", data.goldTicks.price));
+            silverCost.setText(String.format("$%.2f", data.silverTicks.price));
+            bronzeCost.setText(String.format("$%.2f", data.bronzeTicks.price));
+            detailsPanel.repaint();
         } else if (data.chosen) {
 //            System.out.println("Updating JComboBoxes...");
             goldQuant.removeAllItems();
             silverQuant.removeAllItems();
             bronzeQuant.removeAllItems();
-            for (int i = 0; i <= data.goldTicks; i++) {
+            for (int i = 0; i <= data.goldTicks.quantity; i++) {
                 goldQuant.addItem(Integer.toString(i));
             }
-            for(int i = 0; i <= data.silverTicks; i++){
+            for (int i = 0; i <= data.silverTicks.quantity; i++) {
                 silverQuant.addItem(Integer.toString(i));
             }
-            for(int i = 0; i <= data.bronzeTicks; i++){
+            for (int i = 0; i <= data.bronzeTicks.quantity; i++) {
                 bronzeQuant.addItem(Integer.toString(i));
             }
             inputShowPanel.repaint();
+        } else if (data.update) {
+            System.out.println("Changing Total costs");
+            
+            double goldCost = 1.0 * data.goldTicks.quantity * data.goldTicks.price;
+            goldTotal.setText(String.format("$%.2f", goldCost));
+            
+            double silverCost =  1.0 * data.silverTicks.quantity * data.silverTicks.price;
+            silverTotal.setText(String.format("$%.2f", silverCost));
+            
+            double bronzeCost =  1.0 * data.bronzeTicks.quantity * data.bronzeTicks.price;
+            bronzeTotal.setText(String.format("$%.2f", bronzeCost));
+            inputShowPanel.repaint();
+            
+            double totalCost = goldCost + silverCost + bronzeCost;
+            finalCost.setText(String.format("$%.2f", totalCost));
+            infoInputPanel.repaint();
         }
     }
 
