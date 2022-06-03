@@ -10,8 +10,6 @@ package Show_Ticket_Program;
  * @author JL Lopez
  */
 public class TicketData {
-    public String type; 
-    public int quantity;
-    public double price; 
-    
+    public int quantity = 0; 
+    public double price = 0.0;
 }
