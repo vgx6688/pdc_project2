@@ -12,9 +12,6 @@ package Show_Ticket_Program;
 public class UserData {
     public String name; 
     public  String phNum;
-    public String show; 
-    public int gold; 
-    public int silver; 
-    public int bronze; 
+    public ShowData show = new ShowData();
     
 }
