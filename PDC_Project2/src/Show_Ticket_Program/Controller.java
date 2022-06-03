@@ -69,9 +69,15 @@ public class Controller implements ActionListener {
                 break;
             case "Confirm":
                 int confirm = JOptionPane.showConfirmDialog(view, "Please double check inputs then press Yes to confirm.", "Booking confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(confirm == JOptionPane.YES_OPTION){
+                    model.confirmBooking();
+                }
                 break;
             case "Cancel":
                 int cancel = JOptionPane.showConfirmDialog(view, "Do you want to cancel booking session?", "Cancel Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(cancel == JOptionPane.YES_OPTION){
+                    model.cancelBooking();
+                }
                 break;
             default:
                 break;
