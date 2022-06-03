@@ -126,19 +126,19 @@ public class Database {
             rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Gold'");
             if(rs.next()){
                 data.goldTicks.price = rs.getInt("price");
-                System.out.println(data.goldTicks.price);
+//                System.out.println(data.goldTicks.price);
             }
             
             rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Silver'");
             if(rs.next()){
                 data.silverTicks.price = rs.getInt("price");
-                System.out.println(data.silverTicks.price);
+//                System.out.println(data.silverTicks.price);
             }
             
             rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Bronze'");
             if(rs.next()){
                 data.bronzeTicks.price = rs.getInt("price");
-                System.out.println(data.bronzeTicks.price);
+//                System.out.println(data.bronzeTicks.price);
             }
             
             }

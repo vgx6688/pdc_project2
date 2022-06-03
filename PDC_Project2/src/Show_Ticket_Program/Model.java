@@ -85,28 +85,28 @@ public class Model extends Observable {
     public void updateTotalCost(String type, int quantity) {
         switch (type) {
             case "G":
-                System.out.println("gold");
+//                System.out.println("gold");
                 inputData.goldTicks.quantity = quantity;
                 inputData.goldTicks.price = showAData.goldTicks.price;
-                System.out.println(inputData.goldTicks.price);
+//                System.out.println(inputData.goldTicks.price);
                 inputData.update = true;
                 this.setChanged();
                 this.notifyObservers(inputData);
                 break;
             case "S":
-                System.out.println("silver");
+//                System.out.println("silver");
                 inputData.silverTicks.quantity = quantity;
                 inputData.silverTicks.price = showAData.silverTicks.price;
-                System.out.println(inputData.silverTicks.price);
+//                System.out.println(inputData.silverTicks.price);
                 inputData.update = true;
                 this.setChanged();
                 this.notifyObservers(inputData);
                 break;
             case "B":
-                System.out.println("bronze");
+//                System.out.println("bronze");
                 inputData.bronzeTicks.quantity = quantity;
                 inputData.bronzeTicks.price = showAData.bronzeTicks.price;
-                System.out.println(inputData.bronzeTicks.price);
+//                System.out.println(inputData.bronzeTicks.price);
                 inputData.update = true;
                 this.setChanged();
                 this.notifyObservers(inputData);

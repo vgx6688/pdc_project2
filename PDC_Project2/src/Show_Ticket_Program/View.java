@@ -607,7 +607,7 @@ public class View extends JFrame implements Observer {
             }
             inputShowPanel.repaint();
         } else if (data.update) {
-            System.out.println("Changing Total costs");
+//            System.out.println("Changing Total costs");
             
             double goldCost = 1.0 * data.goldTicks.quantity * data.goldTicks.price;
             goldTotal.setText(String.format("$%.2f", goldCost));

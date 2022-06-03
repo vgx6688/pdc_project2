@@ -44,7 +44,7 @@ public class Controller implements ActionListener {
                 model.updateBoxes("C");
                 break;
             case "Gold Ticket":
-                System.out.println("Gold ticket box has been changed");
+//                System.out.println("Gold ticket box has been changed");
                 JComboBox source = (JComboBox) e.getSource();
                 if (source.getItemCount() != 0) {
                     int numTickets = Integer.parseInt((String) source.getSelectedItem());
@@ -52,7 +52,7 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "Silver Ticket":
-                System.out.println("Silver ticket box has been changed");
+//                System.out.println("Silver ticket box has been changed");
                 source = (JComboBox) e.getSource();
                 if (source.getItemCount() != 0) {
                     int numTickets = Integer.parseInt((String) source.getSelectedItem());
@@ -60,7 +60,7 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "Bronze Ticket":
-                System.out.println("Bronze ticket box has been changed");
+//                System.out.println("Bronze ticket box has been changed");
                 source = (JComboBox) e.getSource();
                 if (source.getItemCount() != 0) {
                     int numTickets = Integer.parseInt((String) source.getSelectedItem());
