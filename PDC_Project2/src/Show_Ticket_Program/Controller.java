@@ -26,8 +26,6 @@ public class Controller implements ActionListener {
         model.displayData();
         view.setVisible(true);
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -44,18 +42,37 @@ public class Controller implements ActionListener {
             case "Show C":
 //                System.out.println("Show C Button selected");
                 model.updateBoxes("C");
+                break;
             case "Gold Ticket":
                 System.out.println("Gold ticket box has been changed");
-                JComboBox source = (JComboBox)e.getSource();
-                int numTickets = Integer.parseInt((String)source.getSelectedItem());
-                model.updateTotalCost("G", numTickets);
+                JComboBox source = (JComboBox) e.getSource();
+                if (source.getItemCount() != 0) {
+                    int numTickets = Integer.parseInt((String) source.getSelectedItem());
+                    model.updateTotalCost("G", numTickets);
+                }
+                break;
+            case "Silver Ticket":
+                System.out.println("Silver ticket box has been changed");
+                source = (JComboBox) e.getSource();
+                if (source.getItemCount() != 0) {
+                    int numTickets = Integer.parseInt((String) source.getSelectedItem());
+                    model.updateTotalCost("S", numTickets);
+                }
+                break;
+            case "Bronze Ticket":
+                System.out.println("Bronze ticket box has been changed");
+                source = (JComboBox) e.getSource();
+                if (source.getItemCount() != 0) {
+                    int numTickets = Integer.parseInt((String) source.getSelectedItem());
+                    model.updateTotalCost("B", numTickets);
+                }
                 break;
             case "Confirm":
                 int confirm = JOptionPane.showConfirmDialog(view, "Please double check inputs then press Yes to confirm.", "Booking confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 break;
             case "Cancel":
                 int cancel = JOptionPane.showConfirmDialog(view, "Do you want to cancel booking session?", "Cancel Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                break;  
+                break;
             default:
                 break;
         }
