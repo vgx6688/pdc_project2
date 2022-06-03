@@ -18,4 +18,6 @@ public class ShowData {
     boolean display = true; 
     boolean chosen = false;
     boolean update = false;
+    boolean confirm = false; 
+    boolean cancel = false; 
 }
