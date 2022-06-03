@@ -19,6 +19,7 @@ public class Model extends Observable {
     private ShowData showCData = new ShowData();
     private ShowData inputData = new ShowData();
     String show = "";
+    private UserData userData = new UserData();
 
     public Model() {
         this.db = new Database();
@@ -49,8 +50,8 @@ public class Model extends Observable {
                 case 2:
                     showCData.show = "C";
                     showCData = db.displayData(showCData.show);
-//                    System.out.println("Show C ShowData done");
                     showCData.display = false;
+//                    System.out.println("Show C ShowData done");
                     this.setChanged();
                     this.notifyObservers(showCData);
                     showCData.display = true;
@@ -62,24 +63,26 @@ public class Model extends Observable {
     }
 
     public void updateBoxes(String show) {
+        ShowData data = null;
         switch (show) {
             case "A":
                 showAData.chosen = true;
-                this.setChanged();
-                this.notifyObservers(showAData);
+                data = showAData;
                 break;
             case "B":
                 showBData.chosen = true;
-                this.setChanged();
-                this.notifyObservers(showBData);
+                data = showBData;
                 break;
             case "C":
                 showCData.chosen = true;
-                this.setChanged();
-                this.notifyObservers(showCData);
+                data = showCData;
             default:
                 break;
         }
+        userData.show.show = show;
+        System.out.println(userData.show.show);
+        this.setChanged();
+        this.notifyObservers(data);
     }
 
     public void updateTotalCost(String type, int quantity) {
@@ -88,31 +91,63 @@ public class Model extends Observable {
 //                System.out.println("gold");
                 inputData.goldTicks.quantity = quantity;
                 inputData.goldTicks.price = showAData.goldTicks.price;
+                
+                userData.show.goldTicks.quantity = quantity;
+                userData.show.goldTicks.price = showAData.goldTicks.price;
 //                System.out.println(inputData.goldTicks.price);
-                inputData.update = true;
-                this.setChanged();
-                this.notifyObservers(inputData);
+
                 break;
             case "S":
 //                System.out.println("silver");
                 inputData.silverTicks.quantity = quantity;
                 inputData.silverTicks.price = showAData.silverTicks.price;
+                
+                userData.show.silverTicks.quantity = quantity;
+                userData.show.silverTicks.price = showAData.silverTicks.price;
 //                System.out.println(inputData.silverTicks.price);
-                inputData.update = true;
-                this.setChanged();
-                this.notifyObservers(inputData);
                 break;
             case "B":
 //                System.out.println("bronze");
                 inputData.bronzeTicks.quantity = quantity;
                 inputData.bronzeTicks.price = showAData.bronzeTicks.price;
+                
+                userData.show.bronzeTicks.quantity = quantity;
+                userData.show.bronzeTicks.price = showAData.bronzeTicks.price;
 //                System.out.println(inputData.bronzeTicks.price);
-                inputData.update = true;
-                this.setChanged();
-                this.notifyObservers(inputData);
                 break;
             default:
                 break;
         }
+
+        inputData.update = true;
+        System.out.println(String.format("%d.%d.%d", userData.show.goldTicks.quantity, userData.show.silverTicks.quantity, userData.show.bronzeTicks.quantity ));
+        this.setChanged();
+        this.notifyObservers(inputData);
+    }
+
+    public void cancelBooking() {
+        System.out.println("Cancelling booking");
+        this.inputData.cancel = true;
+        this.inputData.update = false;
+//        System.out.println(inputData.chosen);
+//        System.out.println(inputData.update);
+//        System.out.println(inputData.display);
+//        System.out.println(inputData.confirm);
+//        System.out.println(inputData.cancel);
+        this.setChanged();
+        this.notifyObservers(inputData);
+    }
+
+    public void confirmBooking() {
+        System.out.println("Confirming booking");
+        this.inputData.confirm = true;
+        this.inputData.update = false;
+        System.out.println(inputData.chosen);
+        System.out.println(inputData.update);
+        System.out.println(inputData.display);
+        System.out.println(inputData.confirm);
+        System.out.println(inputData.cancel);
+        this.setChanged();
+        this.notifyObservers(inputData);
     }
 }
