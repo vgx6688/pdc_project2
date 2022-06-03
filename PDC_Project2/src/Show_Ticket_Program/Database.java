@@ -46,7 +46,7 @@ public class Database {
                 } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
                     this.insertTableData(tableName);
                 } else {
-                    statement.executeUpdate("CREATE TABLE " + tableName + " (bookingid VARCHAR(10), name VARCHAR(12), goldticket INT, silverticket INT, bronzeticket INT)");
+                    statement.executeUpdate("CREATE TABLE " + tableName + " (bookingID VARCHAR(5), phNum VARCHAR(10), name VARCHAR(70), goldticket INT, silverticket INT, bronzeticket INT, totalcost DOUBLE)");
                 }
             }
             statement.close();
@@ -114,6 +114,7 @@ public class Database {
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM ShowsInfo WHERE showID = '" + show + "'");
+            
             if (rs.next()) {
                 data.show = rs.getString("showID");
                 data.date = rs.getString("date");
