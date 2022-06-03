@@ -6,9 +6,13 @@
 package Show_Ticket_Program;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -608,20 +612,35 @@ public class View extends JFrame implements Observer {
             inputShowPanel.repaint();
         } else if (data.update) {
 //            System.out.println("Changing Total costs");
-            
+
             double goldCost = 1.0 * data.goldTicks.quantity * data.goldTicks.price;
             goldTotal.setText(String.format("$%.2f", goldCost));
-            
-            double silverCost =  1.0 * data.silverTicks.quantity * data.silverTicks.price;
+
+            double silverCost = 1.0 * data.silverTicks.quantity * data.silverTicks.price;
             silverTotal.setText(String.format("$%.2f", silverCost));
-            
-            double bronzeCost =  1.0 * data.bronzeTicks.quantity * data.bronzeTicks.price;
+
+            double bronzeCost = 1.0 * data.bronzeTicks.quantity * data.bronzeTicks.price;
             bronzeTotal.setText(String.format("$%.2f", bronzeCost));
             inputShowPanel.repaint();
-            
+
             double totalCost = goldCost + silverCost + bronzeCost;
             finalCost.setText(String.format("$%.2f", totalCost));
             infoInputPanel.repaint();
+        } else if(data.cancel){
+            showsButtonGroup.clearSelection();
+            goldQuant.removeAllItems();
+            goldQuant.addItem("0");
+            silverQuant.removeAllItems();
+            silverQuant.addItem("0");
+            bronzeQuant.removeAllItems();
+            bronzeQuant.addItem("0");
+            nameField.setText("");
+            phNumField.setText("");
+            this.repaint();
+            JOptionPane.showMessageDialog(rootPane, "Session Ended", "Booking Session Cancelled", JOptionPane.PLAIN_MESSAGE);
+           this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        } else if(data.confirm){
+            
         }
     }
 
@@ -634,5 +653,29 @@ public class View extends JFrame implements Observer {
         this.bronzeQuant.addActionListener(listener);
         this.confirmButton.addActionListener(listener);
         this.cancelButton.addActionListener(listener);
+        this.addKeyListener();
+    }
+
+    public void addKeyListener() {
+
+        this.nameField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                boolean limit = nameField.getText().length() >= 12;
+                if (!(Character.isAlphabetic(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SPACE)) || limit) {
+                    e.consume();
+                }
+            }
+        });
+
+        this.phNumField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                boolean limit = phNumField.getText().length() >= 10;
+                if (!((Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) || limit) {
+                    e.consume();
+                }
+            }
+        });
     }
 }
