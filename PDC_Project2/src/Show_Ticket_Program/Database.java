@@ -206,16 +206,16 @@ public class Database {
                 bookingID = String.format("%s%04d", data.show.ID, num);
             } else {
                 num = row++;
-                bookingID = String.format("%s%04d", data.show.ID, num);
+//                bookingID = String.format("%s%04d", data.show.ID, num);
             }
 
-            System.out.println("Inserting data");
+//            System.out.println("Inserting data");
 
             sql = String.format("INSERT INTO Shows%sBookings VALUES('%s', '%s', '%s', %d, %d, %d, %f)",
                     data.show.ID, bookingID, data.phNum, data.name, data.show.goldTicks.quantity, data.show.silverTicks.quantity, data.show.bronzeTicks.quantity, totalCost);
             statement.executeUpdate(sql);
 
-            System.out.println("Updating data");
+//            System.out.println("Updating data");
 
             sql = String.format("UPDATE ShowsInfo SET goldticket = %d, silverticket = %d, bronzeticket = %d WHERE showID = '%s'",
                     sData.goldTicks.quantity - data.show.goldTicks.quantity,
