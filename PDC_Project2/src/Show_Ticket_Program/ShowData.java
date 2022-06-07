@@ -10,7 +10,7 @@ package Show_Ticket_Program;
  * @author JL Lopez
  */
 public class ShowData {
-    String show = ""; 
+    String ID = ""; 
     String date = "";
     TicketData goldTicks = new TicketData(); 
     TicketData silverTicks = new TicketData(); 
