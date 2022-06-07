@@ -535,8 +535,8 @@ public class View extends JFrame implements Observer {
     private javax.swing.JLabel goldTotal;
     private javax.swing.JPanel infoInputPanel;
     private javax.swing.JPanel inputShowPanel;
-    private javax.swing.JTextField nameField;
-    private javax.swing.JTextField phNumField;
+    public javax.swing.JTextField nameField;
+    public javax.swing.JTextField phNumField;
     private javax.swing.JLabel requiredInfo;
     private javax.swing.JLabel selectShow;
     private javax.swing.JLabel showABronze;
@@ -554,7 +554,7 @@ public class View extends JFrame implements Observer {
     private javax.swing.JLabel showCGold;
     private javax.swing.JLabel showCSilver;
     private javax.swing.JLabel showCTitle;
-    private javax.swing.ButtonGroup showsButtonGroup;
+    public javax.swing.ButtonGroup showsButtonGroup;
     private javax.swing.JLabel showsTitle;
     private javax.swing.JLabel silverCost;
     public javax.swing.JComboBox<String> silverQuant;
@@ -573,13 +573,13 @@ public class View extends JFrame implements Observer {
     public void update(Observable o, Object arg) {
         ShowData data = (ShowData) arg;
         if (!data.display) {
-            if (data.show.equalsIgnoreCase("A")) {
+            if (data.ID.equalsIgnoreCase("A")) {
 //                System.out.println("Changing text...");
                 showATitle.setText("Show A   " + data.date);
                 showAGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
                 showASilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
                 showABronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
-            } else if (data.show.equalsIgnoreCase("B")) {
+            } else if (data.ID.equalsIgnoreCase("B")) {
                 showBTitle.setText("Show B   " + data.date);
                 showBGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
                 showBSilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
@@ -626,7 +626,7 @@ public class View extends JFrame implements Observer {
             double totalCost = goldCost + silverCost + bronzeCost;
             finalCost.setText(String.format("$%.2f", totalCost));
             infoInputPanel.repaint();
-        } else if(data.cancel){
+        } else if (data.cancel) {
             showsButtonGroup.clearSelection();
             goldQuant.removeAllItems();
             goldQuant.addItem("0");
@@ -638,9 +638,11 @@ public class View extends JFrame implements Observer {
             phNumField.setText("");
             this.repaint();
             JOptionPane.showMessageDialog(rootPane, "Session Ended", "Booking Session Cancelled", JOptionPane.PLAIN_MESSAGE);
-           this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-        } else if(data.confirm){
-            
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        } else if (data.confirm) {
+            String output = String.format("Booking Confirmed. Thank You!\n Your Booking ID is %s", data.ID);
+            JOptionPane.showMessageDialog(rootPane, output, "Booking Confirmed", JOptionPane.PLAIN_MESSAGE);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }
 
@@ -661,7 +663,7 @@ public class View extends JFrame implements Observer {
         this.nameField.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                boolean limit = nameField.getText().length() >= 12;
+                boolean limit = nameField.getText().length() >= 70;
                 if (!(Character.isAlphabetic(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SPACE)) || limit) {
                     e.consume();
                 }
