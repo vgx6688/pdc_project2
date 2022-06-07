@@ -18,7 +18,13 @@ public class Controller implements ActionListener {
 
     public View view;
     public Model model;
-
+    
+    /*
+        @param view
+        @param model
+    
+        Constructor for Controller class
+    */
     public Controller(View view, Model model) {
         this.view = view;
         this.model = model;
@@ -26,7 +32,12 @@ public class Controller implements ActionListener {
         model.displayData();
         view.setVisible(true);
     }
-
+    
+    /*
+        @param ActionEvent Action Events in the GUI
+    
+        Calls methods depending on the actions performed
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();

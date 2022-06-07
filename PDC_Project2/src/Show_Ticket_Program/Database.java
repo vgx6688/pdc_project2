@@ -23,6 +23,9 @@ public class Database {
     String dbusername = "pdc";
     String dbpassword = "pdc";
 
+    /*
+        Sets up the database for use. 
+    */
     public void dbsetup() {
         try {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
@@ -36,7 +39,12 @@ public class Database {
         }
 
     }
-
+    
+    /*
+        @param tableName
+        
+        Calls methods needed for table creation
+    */
     public void createTable(String tableName) {
         try {
             Statement statement = this.conn.createStatement();
@@ -54,7 +62,12 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-
+    
+    /*
+        @param tableName
+        
+        Creates tables and inserts data into tables. 
+    */
     public void insertTableData(String tableName) {
         try {
             Statement statement = conn.createStatement();
@@ -92,7 +105,13 @@ public class Database {
         }
 
     }
-
+    
+    
+    /*
+        @param TableName 
+    
+        Checks if tables already exists in database
+    */
     public boolean checkTableExists(String tableName) {
         boolean exists = false;
         try {
@@ -112,7 +131,13 @@ public class Database {
         }
         return exists;
     }
-
+    
+    
+    /*
+        @param show Show ID
+        
+        Collects data from database that will be displayed in GUI
+    */
     public ShowData displayData(String show) {
         ShowData data = new ShowData();
         try {
@@ -152,7 +177,12 @@ public class Database {
         }
         return data;
     }
-
+    
+    /*
+        @param sData Currently saved data of chosen show
+        @param data User chosen data
+        @param totalCost total cost of chosen tickets
+    */
     public String storeBooking(ShowData sData, UserData data, double totalCost) {
         String bookingID = "";
         int row = 0;

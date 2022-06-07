@@ -19,16 +19,28 @@ public class Model extends Observable {
     private ShowData showCData = new ShowData();
     private ShowData inputData = new ShowData();
     private UserData userData = new UserData();
-
+    
+    /*
+        Constructor for Model Class
+    */
     public Model() {
         this.db = new Database();
         this.db.dbsetup();
     }
     
+    /*
+        @return Show ID
+    
+        Returns the show ID in inputData variable
+    */
     public String getShowID(){
         return inputData.ID;
     }
 
+    
+    /*
+        Assigns the data from the database to a variable for each show. 
+    */
     public void displayData() {
         for (int i = 0; i < 3; i++) {
             switch (i) {
@@ -65,6 +77,11 @@ public class Model extends Observable {
         }
     }
 
+    /*
+        @param show the show ID chosen
+    
+        Updates the JComboBoxes depending on the chosen show. 
+    */
     public void updateBoxes(String show) {
         ShowData data = null;
         switch (show) {
@@ -87,7 +104,14 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers(data);
     }
-
+    
+    
+    /*
+        @param quantity ticket quantity 
+        @param type ticket type
+    
+        Calculates the total cost of the chosen tickets. 
+    */
     public void updateTotalCost(String type, int quantity) {
         switch (type) {
             case "G":
@@ -119,6 +143,10 @@ public class Model extends Observable {
         this.notifyObservers(inputData);
     }
 
+    
+    /*
+        Changes state of the inputData variable and notifies the view class about thet change
+    */
     public void cancelBooking() {
 //        System.out.println("Cancelling booking");
         this.inputData.cancel = true;
@@ -132,6 +160,12 @@ public class Model extends Observable {
         this.notifyObservers(inputData);
     }
 
+    /*
+        @param name User Name
+        @param phNum User Phone number
+    
+        Changes state of inputData and calls database method to update database.
+    */
     public void confirmBooking(String name, String phNum) {
 //        System.out.println("Confirming booking");
         this.inputData.confirm = true;

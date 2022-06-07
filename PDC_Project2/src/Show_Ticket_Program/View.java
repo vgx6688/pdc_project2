@@ -569,6 +569,12 @@ public class View extends JFrame implements Observer {
     private javax.swing.JLabel userPhNum;
     // End of variables declaration//GEN-END:variables
 
+    
+    /*
+        @param arg Data used
+    
+        Changes GUI appearrance when data in model class is updated. 
+    */
     @Override
     public void update(Observable o, Object arg) {
         ShowData data = (ShowData) arg;
@@ -646,6 +652,11 @@ public class View extends JFrame implements Observer {
         }
     }
 
+    /*
+        @param listener ActionListener
+    
+        Adds ActionListener to multiple components
+    */
     public void addActionListener(ActionListener listener) {
         this.showAButton.addActionListener(listener);
         this.showBButton.addActionListener(listener);
@@ -658,6 +669,9 @@ public class View extends JFrame implements Observer {
         this.addKeyListener();
     }
 
+    /*
+        Adds KeyListeners to the two JTextFields
+    */
     public void addKeyListener() {
 
         this.nameField.addKeyListener(new KeyAdapter() {
