@@ -13,7 +13,7 @@ import java.util.Observable;
  */
 public class Model extends Observable {
 
-    public Database db;
+    private Database db;
     private ShowData showAData = new ShowData();
     private ShowData showBData = new ShowData();
     private ShowData showCData = new ShowData();
@@ -27,6 +27,90 @@ public class Model extends Observable {
         this.db = new Database();
         this.db.dbsetup();
     }
+
+    /**
+     * @return the db
+     */
+    public Database getDb() {
+        return db;
+    }
+
+    /**
+     * @param db the db to set
+     */
+    public void setDb(Database db) {
+        this.db = db;
+    }
+
+    /**
+     * @return the showAData
+     */
+    public ShowData getShowAData() {
+        return showAData;
+    }
+
+    /**
+     * @param showAData the showAData to set
+     */
+    public void setShowAData(ShowData showAData) {
+        this.showAData = showAData;
+    }
+
+    /**
+     * @return the showBData
+     */
+    public ShowData getShowBData() {
+        return showBData;
+    }
+
+    /**
+     * @param showBData the showBData to set
+     */
+    public void setShowBData(ShowData showBData) {
+        this.showBData = showBData;
+    }
+
+    /**
+     * @return the showCData
+     */
+    public ShowData getShowCData() {
+        return showCData;
+    }
+
+    /**
+     * @param showCData the showCData to set
+     */
+    public void setShowCData(ShowData showCData) {
+        this.showCData = showCData;
+    }
+
+    /**
+     * @return the inputData
+     */
+    public ShowData getInputData() {
+        return inputData;
+    }
+
+    /**
+     * @param inputData the inputData to set
+     */
+    public void setInputData(ShowData inputData) {
+        this.inputData = inputData;
+    }
+
+    /**
+     * @return the userData
+     */
+    public UserData getUserData() {
+        return userData;
+    }
+
+    /**
+     * @param userData the userData to set
+     */
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
     
     /*
         @return Show ID
@@ -34,7 +118,7 @@ public class Model extends Observable {
         Returns the show ID in inputData variable
     */
     public String getShowID(){
-        return inputData.ID;
+        return getInputData().ID;
     }
 
     
@@ -46,29 +130,29 @@ public class Model extends Observable {
             switch (i) {
                 case 0:
                     showAData.ID = "A";
-                    showAData = db.displayData(showAData.ID);
+                    setShowAData(getDb().displayData(getShowAData().ID));
                     showAData.display = false;
 //                    System.out.println("Show A ShowData done");
                     this.setChanged();
-                    this.notifyObservers(showAData);
+                    this.notifyObservers(getShowAData());
                     showAData.display = true;
                     break;
                 case 1:
                     showBData.ID = "B";
-                    showBData = db.displayData(showBData.ID);
+                    setShowBData(getDb().displayData(getShowBData().ID));
                     showBData.display = false;
 //                    System.out.println("Show B ShowData done");
                     this.setChanged();
-                    this.notifyObservers(showBData);
+                    this.notifyObservers(getShowBData());
                     showBData.display = true;
                     break;
                 case 2:
                     showCData.ID = "C";
-                    showCData = db.displayData(showCData.ID);
+                    setShowCData(getDb().displayData(getShowCData().ID));
                     showCData.display = false;
 //                    System.out.println("Show C ShowData done");
                     this.setChanged();
-                    this.notifyObservers(showCData);
+                    this.notifyObservers(getShowCData());
                     showCData.display = true;
                     break;
                 default:
@@ -87,15 +171,15 @@ public class Model extends Observable {
         switch (show) {
             case "A":
                 showAData.chosen = true;
-                data = showAData;
+                data = getShowAData();
                 break;
             case "B":
                 showBData.chosen = true;
-                data = showBData;
+                data = getShowBData();
                 break;
             case "C":
                 showCData.chosen = true;
-                data = showCData;
+                data = getShowCData();
             default:
                 break;
         }
@@ -117,20 +201,20 @@ public class Model extends Observable {
             case "G":
 //                System.out.println("gold");
                 inputData.goldTicks.quantity = quantity;
-                inputData.goldTicks.price = showAData.goldTicks.price;
+                inputData.goldTicks.price = getShowAData().goldTicks.price;
 //                System.out.println(inputData.goldTicks.price);
 
                 break;
             case "S":
 //                System.out.println("silver");
                 inputData.silverTicks.quantity = quantity;
-                inputData.silverTicks.price = showAData.silverTicks.price;
+                inputData.silverTicks.price = getShowAData().silverTicks.price;
 //                System.out.println(inputData.silverTicks.price);
                 break;
             case "B":
 //                System.out.println("bronze");
                 inputData.bronzeTicks.quantity = quantity;
-                inputData.bronzeTicks.price = showAData.bronzeTicks.price;
+                inputData.bronzeTicks.price = getShowAData().bronzeTicks.price;
 //                System.out.println(inputData.bronzeTicks.price);
                 break;
             default:
@@ -140,7 +224,7 @@ public class Model extends Observable {
         inputData.update = true;
 //        System.out.println(String.format("%d.%d.%d", userData.ID.goldTicks.quantity, userData.ID.silverTicks.quantity, userData.ID.bronzeTicks.quantity));
         this.setChanged();
-        this.notifyObservers(inputData);
+        this.notifyObservers(getInputData());
     }
 
     
@@ -157,7 +241,7 @@ public class Model extends Observable {
 //        System.out.println(inputData.confirm);
 //        System.out.println(inputData.cancel);
         this.setChanged();
-        this.notifyObservers(inputData);
+        this.notifyObservers(getInputData());
     }
 
     /*
@@ -171,9 +255,9 @@ public class Model extends Observable {
         this.inputData.confirm = true;
         this.inputData.update = false;
         
-        double totalCost = 1.0 * (inputData.goldTicks.quantity * inputData.goldTicks.price + 
-                inputData.silverTicks.quantity*inputData.silverTicks.price + 
-                inputData.bronzeTicks.quantity*inputData.bronzeTicks.price);
+        double totalCost = 1.0 * (getInputData().goldTicks.quantity * getInputData().goldTicks.price + 
+                getInputData().silverTicks.quantity*getInputData().silverTicks.price + 
+                getInputData().bronzeTicks.quantity*getInputData().bronzeTicks.price);
 //        System.out.println(inputData.chosen);
 //        System.out.println(inputData.update);
 //        System.out.println(inputData.display);
@@ -182,7 +266,7 @@ public class Model extends Observable {
 
         userData.name = name; 
         userData.phNum = phNum; 
-        userData.show = this.inputData;
+        userData.show = this.getInputData();
         
 //        System.out.println(userData.name);
 //        System.out.println(userData.phNum);
@@ -192,24 +276,24 @@ public class Model extends Observable {
 //        System.out.println(userData.show.bronzeTicks.quantity);
         
         ShowData data = null; 
-        switch(inputData.ID){
+        switch(getInputData().ID){
             case "A":
-                data = this.showAData;
+                data = this.getShowAData();
                 break;
             case "B":
-                data = this.showBData;
+                data = this.getShowBData();
                 break;
             case "C":
-                data = this.showCData;
+                data = this.getShowCData();
                 break;
             default:
                 break;
         }
         
-        String bookingID = db.storeBooking(data, userData, totalCost);
+        String bookingID = getDb().storeBooking(data, getUserData(), totalCost);
         inputData.ID = bookingID;
         
         this.setChanged();
-        this.notifyObservers(inputData);
+        this.notifyObservers(getInputData());
     }
 }

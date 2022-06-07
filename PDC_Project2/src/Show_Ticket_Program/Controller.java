@@ -79,12 +79,12 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "Confirm":
-                String name = view.nameField.getText();
-                String phNum = view.phNumField.getText();
+                String name = view.getNameField().getText();
+                String phNum = view.getPhNumField().getText();
                 String show = model.getShowID();
-                int gold = Integer.parseInt((String)view.goldQuant.getSelectedItem());
-                int silver = Integer.parseInt((String)view.silverQuant.getSelectedItem());
-                int bronze = Integer.parseInt((String)view.bronzeQuant.getSelectedItem());
+                int gold = Integer.parseInt((String)view.getGoldQuant().getSelectedItem());
+                int silver = Integer.parseInt((String)view.getSilverQuant().getSelectedItem());
+                int bronze = Integer.parseInt((String)view.getBronzeQuant().getSelectedItem());
                 
                 if(name.equalsIgnoreCase("") || name == null){
                     JOptionPane.showMessageDialog(view, "Please input your name", "Error", JOptionPane.ERROR_MESSAGE);

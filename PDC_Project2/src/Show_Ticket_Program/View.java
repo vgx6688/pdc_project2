@@ -569,79 +569,78 @@ public class View extends JFrame implements Observer {
     private javax.swing.JLabel userPhNum;
     // End of variables declaration//GEN-END:variables
 
-    
     /*
         @param arg Data used
     
         Changes GUI appearrance when data in model class is updated. 
-    */
+     */
     @Override
     public void update(Observable o, Object arg) {
         ShowData data = (ShowData) arg;
         if (!data.display) {
             if (data.ID.equalsIgnoreCase("A")) {
 //                System.out.println("Changing text...");
-                showATitle.setText("Show A   " + data.date);
-                showAGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
-                showASilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
-                showABronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
+                getShowATitle().setText("Show A   " + data.date);
+                getShowAGold().setText("Gold: " + Integer.toString(data.goldTicks.quantity));
+                getShowASilver().setText("Silver: " + Integer.toString(data.silverTicks.quantity));
+                getShowABronze().setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
             } else if (data.ID.equalsIgnoreCase("B")) {
-                showBTitle.setText("Show B   " + data.date);
-                showBGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
-                showBSilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
-                showBBronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
+                getShowBTitle().setText("Show B   " + data.date);
+                getShowBGold().setText("Gold: " + Integer.toString(data.goldTicks.quantity));
+                getShowBSilver().setText("Silver: " + Integer.toString(data.silverTicks.quantity));
+                getShowBBronze().setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
             } else {
-                showCTitle.setText("Show C   " + data.date);
-                showCGold.setText("Gold: " + Integer.toString(data.goldTicks.quantity));
-                showCSilver.setText("Silver: " + Integer.toString(data.silverTicks.quantity));
-                showCBronze.setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
+                getShowCTitle().setText("Show C   " + data.date);
+                getShowCGold().setText("Gold: " + Integer.toString(data.goldTicks.quantity));
+                getShowCSilver().setText("Silver: " + Integer.toString(data.silverTicks.quantity));
+                getShowCBronze().setText("Bronze: " + Integer.toString(data.bronzeTicks.quantity));
             }
 
-            goldCost.setText(String.format("$%.2f", data.goldTicks.price));
-            silverCost.setText(String.format("$%.2f", data.silverTicks.price));
-            bronzeCost.setText(String.format("$%.2f", data.bronzeTicks.price));
-            detailsPanel.repaint();
+            getGoldCost().setText(String.format("$%.2f", data.goldTicks.price));
+            getSilverCost().setText(String.format("$%.2f", data.silverTicks.price));
+            getBronzeCost().setText(String.format("$%.2f", data.bronzeTicks.price));
+            getDetailsPanel().repaint();
         } else if (data.chosen) {
 //            System.out.println("Updating JComboBoxes...");
-            goldQuant.removeAllItems();
-            silverQuant.removeAllItems();
-            bronzeQuant.removeAllItems();
+            getGoldQuant().removeAllItems();
+            getSilverQuant().removeAllItems();
+            getBronzeQuant().removeAllItems();
             for (int i = 0; i <= data.goldTicks.quantity; i++) {
-                goldQuant.addItem(Integer.toString(i));
+                getGoldQuant().addItem(Integer.toString(i));
             }
             for (int i = 0; i <= data.silverTicks.quantity; i++) {
-                silverQuant.addItem(Integer.toString(i));
+                getSilverQuant().addItem(Integer.toString(i));
             }
             for (int i = 0; i <= data.bronzeTicks.quantity; i++) {
-                bronzeQuant.addItem(Integer.toString(i));
+                getBronzeQuant().addItem(Integer.toString(i));
             }
-            inputShowPanel.repaint();
+            getInputShowPanel().repaint();
         } else if (data.update) {
 //            System.out.println("Changing Total costs");
 
             double goldCost = 1.0 * data.goldTicks.quantity * data.goldTicks.price;
-            goldTotal.setText(String.format("$%.2f", goldCost));
+            getGoldTotal().setText(String.format("$%.2f", goldCost));
 
             double silverCost = 1.0 * data.silverTicks.quantity * data.silverTicks.price;
-            silverTotal.setText(String.format("$%.2f", silverCost));
+            getSilverTotal().setText(String.format("$%.2f", silverCost));
 
             double bronzeCost = 1.0 * data.bronzeTicks.quantity * data.bronzeTicks.price;
-            bronzeTotal.setText(String.format("$%.2f", bronzeCost));
-            inputShowPanel.repaint();
+            getBronzeTotal().setText(String.format("$%.2f", bronzeCost));
+            getInputShowPanel().repaint();
 
             double totalCost = goldCost + silverCost + bronzeCost;
-            finalCost.setText(String.format("$%.2f", totalCost));
-            infoInputPanel.repaint();
+            getFinalCost().setText(String.format("$%.2f", totalCost));
+            getInfoInputPanel().repaint();
         } else if (data.cancel) {
-            showsButtonGroup.clearSelection();
-            goldQuant.removeAllItems();
-            goldQuant.addItem("0");
-            silverQuant.removeAllItems();
-            silverQuant.addItem("0");
-            bronzeQuant.removeAllItems();
-            bronzeQuant.addItem("0");
-            nameField.setText("");
-            phNumField.setText("");
+            getShowsButtonGroup().clearSelection();
+            getGoldQuant().removeAllItems();
+            getGoldQuant().addItem("0");
+            getSilverQuant().removeAllItems();
+            getSilverQuant().addItem("0");
+            getBronzeQuant().removeAllItems();
+            getBronzeQuant().addItem("0");
+            getNameField().setText("");
+            getPhNumField().setText("");
             this.repaint();
             JOptionPane.showMessageDialog(rootPane, "Session Ended", "Booking Session Cancelled", JOptionPane.PLAIN_MESSAGE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -656,42 +655,385 @@ public class View extends JFrame implements Observer {
         @param listener ActionListener
     
         Adds ActionListener to multiple components
-    */
+     */
     public void addActionListener(ActionListener listener) {
-        this.showAButton.addActionListener(listener);
-        this.showBButton.addActionListener(listener);
-        this.showCButton.addActionListener(listener);
-        this.goldQuant.addActionListener(listener);
-        this.silverQuant.addActionListener(listener);
-        this.bronzeQuant.addActionListener(listener);
-        this.confirmButton.addActionListener(listener);
-        this.cancelButton.addActionListener(listener);
+        this.getShowAButton().addActionListener(listener);
+        this.getShowBButton().addActionListener(listener);
+        this.getShowCButton().addActionListener(listener);
+        this.getGoldQuant().addActionListener(listener);
+        this.getSilverQuant().addActionListener(listener);
+        this.getBronzeQuant().addActionListener(listener);
+        this.getConfirmButton().addActionListener(listener);
+        this.getCancelButton().addActionListener(listener);
         this.addKeyListener();
     }
 
     /*
         Adds KeyListeners to the two JTextFields
-    */
+     */
     public void addKeyListener() {
 
-        this.nameField.addKeyListener(new KeyAdapter() {
+        this.getNameField().addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                boolean limit = nameField.getText().length() >= 70;
+                boolean limit = getNameField().getText().length() >= 70;
                 if (!(Character.isAlphabetic(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SPACE)) || limit) {
                     e.consume();
                 }
             }
         });
 
-        this.phNumField.addKeyListener(new KeyAdapter() {
+        this.getPhNumField().addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                boolean limit = phNumField.getText().length() >= 10;
+                boolean limit = getPhNumField().getText().length() >= 10;
                 if (!((Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) || limit) {
                     e.consume();
                 }
             }
         });
+    }
+
+    /**
+     * @return the bronzeCost
+     */
+    public javax.swing.JLabel getBronzeCost() {
+        return bronzeCost;
+    }
+
+    /**
+     * @return the bronzeQuant
+     */
+    public javax.swing.JComboBox<String> getBronzeQuant() {
+        return bronzeQuant;
+    }
+
+    /**
+     * @return the bronzeTickets
+     */
+    public javax.swing.JLabel getBronzeTickets() {
+        return bronzeTickets;
+    }
+
+    /**
+     * @return the bronzeTotal
+     */
+    public javax.swing.JLabel getBronzeTotal() {
+        return bronzeTotal;
+    }
+
+    /**
+     * @return the cancelButton
+     */
+    public javax.swing.JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    /**
+     * @return the confirmButton
+     */
+    public javax.swing.JButton getConfirmButton() {
+        return confirmButton;
+    }
+
+    /**
+     * @return the costLabel
+     */
+    public javax.swing.JLabel getCostLabel() {
+        return costLabel;
+    }
+
+    /**
+     * @return the detailsLabel
+     */
+    public javax.swing.JLabel getDetailsLabel() {
+        return detailsLabel;
+    }
+
+    /**
+     * @return the detailsPanel
+     */
+    public javax.swing.JPanel getDetailsPanel() {
+        return detailsPanel;
+    }
+
+    /**
+     * @return the finalCost
+     */
+    public javax.swing.JLabel getFinalCost() {
+        return finalCost;
+    }
+
+    /**
+     * @return the finalCostlabel
+     */
+    public javax.swing.JLabel getFinalCostlabel() {
+        return finalCostlabel;
+    }
+
+    /**
+     * @return the goldCost
+     */
+    public javax.swing.JLabel getGoldCost() {
+        return goldCost;
+    }
+
+    /**
+     * @return the goldQuant
+     */
+    public javax.swing.JComboBox<String> getGoldQuant() {
+        return goldQuant;
+    }
+
+    /**
+     * @return the goldTickets
+     */
+    public javax.swing.JLabel getGoldTickets() {
+        return goldTickets;
+    }
+
+    /**
+     * @return the goldTotal
+     */
+    public javax.swing.JLabel getGoldTotal() {
+        return goldTotal;
+    }
+
+    /**
+     * @return the infoInputPanel
+     */
+    public javax.swing.JPanel getInfoInputPanel() {
+        return infoInputPanel;
+    }
+
+    /**
+     * @return the inputShowPanel
+     */
+    public javax.swing.JPanel getInputShowPanel() {
+        return inputShowPanel;
+    }
+
+    /**
+     * @return the nameField
+     */
+    public javax.swing.JTextField getNameField() {
+        return nameField;
+    }
+
+    /**
+     * @return the phNumField
+     */
+    public javax.swing.JTextField getPhNumField() {
+        return phNumField;
+    }
+
+    /**
+     * @return the requiredInfo
+     */
+    public javax.swing.JLabel getRequiredInfo() {
+        return requiredInfo;
+    }
+
+    /**
+     * @return the selectShow
+     */
+    public javax.swing.JLabel getSelectShow() {
+        return selectShow;
+    }
+
+    /**
+     * @return the showABronze
+     */
+    public javax.swing.JLabel getShowABronze() {
+        return showABronze;
+    }
+
+    /**
+     * @return the showAButton
+     */
+    public javax.swing.JRadioButton getShowAButton() {
+        return showAButton;
+    }
+
+    /**
+     * @return the showAGold
+     */
+    public javax.swing.JLabel getShowAGold() {
+        return showAGold;
+    }
+
+    /**
+     * @return the showASilver
+     */
+    public javax.swing.JLabel getShowASilver() {
+        return showASilver;
+    }
+
+    /**
+     * @return the showATitle
+     */
+    public javax.swing.JLabel getShowATitle() {
+        return showATitle;
+    }
+
+    /**
+     * @return the showBBronze
+     */
+    public javax.swing.JLabel getShowBBronze() {
+        return showBBronze;
+    }
+
+    /**
+     * @return the showBButton
+     */
+    public javax.swing.JRadioButton getShowBButton() {
+        return showBButton;
+    }
+
+    /**
+     * @return the showBGold
+     */
+    public javax.swing.JLabel getShowBGold() {
+        return showBGold;
+    }
+
+    /**
+     * @return the showBSilver
+     */
+    public javax.swing.JLabel getShowBSilver() {
+        return showBSilver;
+    }
+
+    /**
+     * @return the showBTitle
+     */
+    public javax.swing.JLabel getShowBTitle() {
+        return showBTitle;
+    }
+
+    /**
+     * @return the showCBronze
+     */
+    public javax.swing.JLabel getShowCBronze() {
+        return showCBronze;
+    }
+
+    /**
+     * @return the showCButton
+     */
+    public javax.swing.JRadioButton getShowCButton() {
+        return showCButton;
+    }
+
+    /**
+     * @return the showCGold
+     */
+    public javax.swing.JLabel getShowCGold() {
+        return showCGold;
+    }
+
+    /**
+     * @return the showCSilver
+     */
+    public javax.swing.JLabel getShowCSilver() {
+        return showCSilver;
+    }
+
+    /**
+     * @return the showCTitle
+     */
+    public javax.swing.JLabel getShowCTitle() {
+        return showCTitle;
+    }
+
+    /**
+     * @return the showsButtonGroup
+     */
+    public javax.swing.ButtonGroup getShowsButtonGroup() {
+        return showsButtonGroup;
+    }
+
+    /**
+     * @return the showsTitle
+     */
+    public javax.swing.JLabel getShowsTitle() {
+        return showsTitle;
+    }
+
+    /**
+     * @return the silverCost
+     */
+    public javax.swing.JLabel getSilverCost() {
+        return silverCost;
+    }
+
+    /**
+     * @return the silverQuant
+     */
+    public javax.swing.JComboBox<String> getSilverQuant() {
+        return silverQuant;
+    }
+
+    /**
+     * @return the silverTickets
+     */
+    public javax.swing.JLabel getSilverTickets() {
+        return silverTickets;
+    }
+
+    /**
+     * @return the silverTotal
+     */
+    public javax.swing.JLabel getSilverTotal() {
+        return silverTotal;
+    }
+
+    /**
+     * @return the ticketQuants
+     */
+    public javax.swing.JLabel getTicketQuants() {
+        return ticketQuants;
+    }
+
+    /**
+     * @return the ticketTypes
+     */
+    public javax.swing.JLabel getTicketTypes() {
+        return ticketTypes;
+    }
+
+    /**
+     * @return the titleLabel
+     */
+    public javax.swing.JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    /**
+     * @return the titlePanel
+     */
+    public javax.swing.JPanel getTitlePanel() {
+        return titlePanel;
+    }
+
+    /**
+     * @return the totalCost
+     */
+    public javax.swing.JLabel getTotalCost() {
+        return totalCost;
+    }
+
+    /**
+     * @return the userName
+     */
+    public javax.swing.JLabel getUserName() {
+        return userName;
+    }
+
+    /**
+     * @return the userPhNum
+     */
+    public javax.swing.JLabel getUserPhNum() {
+        return userPhNum;
     }
 }
