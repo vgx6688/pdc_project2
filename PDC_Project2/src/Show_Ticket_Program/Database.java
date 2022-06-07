@@ -46,7 +46,7 @@ public class Database {
                 } else if (tableName.equalsIgnoreCase("TicketsInfo")) {
                     this.insertTableData(tableName);
                 } else {
-                    statement.executeUpdate("CREATE TABLE " + tableName + " (bookingID VARCHAR(5), phNum VARCHAR(10), name VARCHAR(70), goldticket INT, silverticket INT, bronzeticket INT, totalcost DOUBLE)");
+                    this.insertTableData(tableName);
                 }
             }
             statement.close();
@@ -82,6 +82,10 @@ public class Database {
 //                    String type =  rs.getString("tickettype");
 //                    System.out.println(type);
 //                }
+            } else {
+                statement.addBatch("CREATE TABLE " + tableName + " (bookingID VARCHAR(5), phNum VARCHAR(10), name VARCHAR(70), goldticket INT, silverticket INT, bronzeticket INT, totalcost DOUBLE)");
+                statement.addBatch("INSERT INTO " + tableName + " VALUES('0000', 'null', 'null', 0, 0, 0, 0)");
+                statement.executeBatch();
             }
         } catch (Throwable e) {
             System.out.println(e.getMessage());
@@ -114,38 +118,87 @@ public class Database {
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM ShowsInfo WHERE showID = '" + show + "'");
-            
+
             if (rs.next()) {
-                data.show = rs.getString("showID");
+                data.ID = rs.getString("showID");
                 data.date = rs.getString("date");
                 data.goldTicks.quantity = rs.getInt("goldticket");
                 data.silverTicks.quantity = rs.getInt("silverticket");
                 data.bronzeTicks.quantity = rs.getInt("bronzeticket");
 
-//                System.out.println(String.format("%s, %s, %d, %d, %d", data.show, data.date, data.goldTicks, data.silverTicks, data.bronzeTicks));
-
-            rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Gold'");
-            if(rs.next()){
-                data.goldTicks.price = rs.getInt("price");
+//                System.out.println(String.format("%s, %s, %d, %d, %d", data.ID, data.date, data.goldTicks, data.silverTicks, data.bronzeTicks));
+                rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Gold'");
+                if (rs.next()) {
+                    data.goldTicks.price = rs.getInt("price");
 //                System.out.println(data.goldTicks.price);
-            }
-            
-            rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Silver'");
-            if(rs.next()){
-                data.silverTicks.price = rs.getInt("price");
+                }
+
+                rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Silver'");
+                if (rs.next()) {
+                    data.silverTicks.price = rs.getInt("price");
 //                System.out.println(data.silverTicks.price);
-            }
-            
-            rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Bronze'");
-            if(rs.next()){
-                data.bronzeTicks.price = rs.getInt("price");
+                }
+
+                rs = statement.executeQuery("SELECT price FROM TicketsInfo WHERE tickettype = 'Bronze'");
+                if (rs.next()) {
+                    data.bronzeTicks.price = rs.getInt("price");
 //                System.out.println(data.bronzeTicks.price);
+                }
+
             }
-            
-            }
+            rs.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return data;
+    }
+
+    public String storeBooking(ShowData sData, UserData data, double totalCost) {
+        String bookingID = "";
+        int row = 0;
+        int num = 0;
+        try {
+            Statement statement = conn.createStatement();
+            String sql = "";
+            
+            sql = String.format("SELECT * FROM Shows%sBookings", data.show.ID);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+
+                row++;
+
+                System.out.println(rs.getString("bookingID"));
+            }
+
+            if (row == 0) {
+                num = 1;
+                bookingID = String.format("%s%04d", data.show.ID, num);
+            } else {
+                num = row++;
+                bookingID = String.format("%s%04d", data.show.ID, num);
+            }
+
+            System.out.println("Inserting data");
+
+            sql = String.format("INSERT INTO Shows%sBookings VALUES('%s', '%s', '%s', %d, %d, %d, %f)",
+                    data.show.ID, bookingID, data.phNum, data.name, data.show.goldTicks.quantity, data.show.silverTicks.quantity, data.show.bronzeTicks.quantity, totalCost);
+            statement.executeUpdate(sql);
+
+            System.out.println("Updating data");
+
+            sql = String.format("UPDATE ShowsInfo SET goldticket = %d, silverticket = %d, bronzeticket = %d WHERE showID = '%s'",
+                    sData.goldTicks.quantity - data.show.goldTicks.quantity,
+                    sData.silverTicks.quantity - data.show.silverTicks.quantity,
+                    sData.bronzeTicks.quantity - data.show.bronzeTicks.quantity,
+                    sData.ID);
+
+            statement.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return bookingID;
     }
 }
