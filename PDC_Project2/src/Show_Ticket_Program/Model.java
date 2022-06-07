@@ -18,20 +18,23 @@ public class Model extends Observable {
     private ShowData showBData = new ShowData();
     private ShowData showCData = new ShowData();
     private ShowData inputData = new ShowData();
-    String show = "";
     private UserData userData = new UserData();
 
     public Model() {
         this.db = new Database();
         this.db.dbsetup();
     }
+    
+    public String getShowID(){
+        return inputData.ID;
+    }
 
     public void displayData() {
         for (int i = 0; i < 3; i++) {
             switch (i) {
                 case 0:
-                    showAData.show = "A";
-                    showAData = db.displayData(showAData.show);
+                    showAData.ID = "A";
+                    showAData = db.displayData(showAData.ID);
                     showAData.display = false;
 //                    System.out.println("Show A ShowData done");
                     this.setChanged();
@@ -39,8 +42,8 @@ public class Model extends Observable {
                     showAData.display = true;
                     break;
                 case 1:
-                    showBData.show = "B";
-                    showBData = db.displayData(showBData.show);
+                    showBData.ID = "B";
+                    showBData = db.displayData(showBData.ID);
                     showBData.display = false;
 //                    System.out.println("Show B ShowData done");
                     this.setChanged();
@@ -48,8 +51,8 @@ public class Model extends Observable {
                     showBData.display = true;
                     break;
                 case 2:
-                    showCData.show = "C";
-                    showCData = db.displayData(showCData.show);
+                    showCData.ID = "C";
+                    showCData = db.displayData(showCData.ID);
                     showCData.display = false;
 //                    System.out.println("Show C ShowData done");
                     this.setChanged();
@@ -79,8 +82,8 @@ public class Model extends Observable {
             default:
                 break;
         }
-        userData.show.show = show;
-        System.out.println(userData.show.show);
+        inputData.ID = show;
+//        System.out.println(userData.ID.ID);
         this.setChanged();
         this.notifyObservers(data);
     }
@@ -91,9 +94,6 @@ public class Model extends Observable {
 //                System.out.println("gold");
                 inputData.goldTicks.quantity = quantity;
                 inputData.goldTicks.price = showAData.goldTicks.price;
-                
-                userData.show.goldTicks.quantity = quantity;
-                userData.show.goldTicks.price = showAData.goldTicks.price;
 //                System.out.println(inputData.goldTicks.price);
 
                 break;
@@ -101,18 +101,12 @@ public class Model extends Observable {
 //                System.out.println("silver");
                 inputData.silverTicks.quantity = quantity;
                 inputData.silverTicks.price = showAData.silverTicks.price;
-                
-                userData.show.silverTicks.quantity = quantity;
-                userData.show.silverTicks.price = showAData.silverTicks.price;
 //                System.out.println(inputData.silverTicks.price);
                 break;
             case "B":
 //                System.out.println("bronze");
                 inputData.bronzeTicks.quantity = quantity;
                 inputData.bronzeTicks.price = showAData.bronzeTicks.price;
-                
-                userData.show.bronzeTicks.quantity = quantity;
-                userData.show.bronzeTicks.price = showAData.bronzeTicks.price;
 //                System.out.println(inputData.bronzeTicks.price);
                 break;
             default:
@@ -120,13 +114,13 @@ public class Model extends Observable {
         }
 
         inputData.update = true;
-        System.out.println(String.format("%d.%d.%d", userData.show.goldTicks.quantity, userData.show.silverTicks.quantity, userData.show.bronzeTicks.quantity ));
+//        System.out.println(String.format("%d.%d.%d", userData.ID.goldTicks.quantity, userData.ID.silverTicks.quantity, userData.ID.bronzeTicks.quantity));
         this.setChanged();
         this.notifyObservers(inputData);
     }
 
     public void cancelBooking() {
-        System.out.println("Cancelling booking");
+//        System.out.println("Cancelling booking");
         this.inputData.cancel = true;
         this.inputData.update = false;
 //        System.out.println(inputData.chosen);
@@ -138,15 +132,49 @@ public class Model extends Observable {
         this.notifyObservers(inputData);
     }
 
-    public void confirmBooking() {
-        System.out.println("Confirming booking");
+    public void confirmBooking(String name, String phNum) {
+//        System.out.println("Confirming booking");
         this.inputData.confirm = true;
         this.inputData.update = false;
-        System.out.println(inputData.chosen);
-        System.out.println(inputData.update);
-        System.out.println(inputData.display);
-        System.out.println(inputData.confirm);
-        System.out.println(inputData.cancel);
+        
+        double totalCost = 1.0 * (inputData.goldTicks.quantity * inputData.goldTicks.price + 
+                inputData.silverTicks.quantity*inputData.silverTicks.price + 
+                inputData.bronzeTicks.quantity*inputData.bronzeTicks.price);
+//        System.out.println(inputData.chosen);
+//        System.out.println(inputData.update);
+//        System.out.println(inputData.display);
+//        System.out.println(inputData.confirm);
+//        System.out.println(inputData.cancel);
+
+        userData.name = name; 
+        userData.phNum = phNum; 
+        userData.show = this.inputData;
+        
+//        System.out.println(userData.name);
+//        System.out.println(userData.phNum);
+//        System.out.println(userData.show.ID);
+//        System.out.println(userData.show.goldTicks.quantity);
+//        System.out.println(userData.show.silverTicks.quantity);
+//        System.out.println(userData.show.bronzeTicks.quantity);
+        
+        ShowData data = null; 
+        switch(inputData.ID){
+            case "A":
+                data = this.showAData;
+                break;
+            case "B":
+                data = this.showBData;
+                break;
+            case "C":
+                data = this.showCData;
+                break;
+            default:
+                break;
+        }
+        
+        String bookingID = db.storeBooking(data, userData, totalCost);
+        inputData.ID = bookingID;
+        
         this.setChanged();
         this.notifyObservers(inputData);
     }
