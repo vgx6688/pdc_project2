@@ -25,7 +25,7 @@ public class Database {
 
     /*
         Sets up the database for use. 
-    */
+     */
     public void dbsetup() {
         try {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
@@ -39,12 +39,12 @@ public class Database {
         }
 
     }
-    
+
     /*
         @param tableName
         
         Calls methods needed for table creation
-    */
+     */
     public void createTable(String tableName) {
         try {
             Statement statement = this.conn.createStatement();
@@ -62,12 +62,12 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-    
+
     /*
         @param tableName
         
         Creates tables and inserts data into tables. 
-    */
+     */
     public void insertTableData(String tableName) {
         try {
             Statement statement = conn.createStatement();
@@ -105,13 +105,12 @@ public class Database {
         }
 
     }
-    
-    
+
     /*
         @param TableName 
     
         Checks if tables already exists in database
-    */
+     */
     public boolean checkTableExists(String tableName) {
         boolean exists = false;
         try {
@@ -131,13 +130,12 @@ public class Database {
         }
         return exists;
     }
-    
-    
+
     /*
         @param show Show ID
         
         Collects data from database that will be displayed in GUI
-    */
+     */
     public ShowData displayData(String show) {
         ShowData data = new ShowData();
         try {
@@ -177,12 +175,12 @@ public class Database {
         }
         return data;
     }
-    
+
     /*
         @param sData Currently saved data of chosen show
         @param data User chosen data
         @param totalCost total cost of chosen tickets
-    */
+     */
     public String storeBooking(ShowData sData, UserData data, double totalCost) {
         String bookingID = "";
         int row = 0;
@@ -190,7 +188,7 @@ public class Database {
         try {
             Statement statement = conn.createStatement();
             String sql = "";
-            
+
             sql = String.format("SELECT * FROM Shows%sBookings", data.show.ID);
             ResultSet rs = statement.executeQuery(sql);
 
@@ -206,17 +204,15 @@ public class Database {
                 bookingID = String.format("%s%04d", data.show.ID, num);
             } else {
                 num = row++;
-//                bookingID = String.format("%s%04d", data.show.ID, num);
+                bookingID = String.format("%s%04d", data.show.ID, num);
             }
 
 //            System.out.println("Inserting data");
-
             sql = String.format("INSERT INTO Shows%sBookings VALUES('%s', '%s', '%s', %d, %d, %d, %f)",
                     data.show.ID, bookingID, data.phNum, data.name, data.show.goldTicks.quantity, data.show.silverTicks.quantity, data.show.bronzeTicks.quantity, totalCost);
             statement.executeUpdate(sql);
 
 //            System.out.println("Updating data");
-
             sql = String.format("UPDATE ShowsInfo SET goldticket = %d, silverticket = %d, bronzeticket = %d WHERE showID = '%s'",
                     sData.goldTicks.quantity - data.show.goldTicks.quantity,
                     sData.silverTicks.quantity - data.show.silverTicks.quantity,
